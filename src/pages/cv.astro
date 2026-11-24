@@ -12,7 +12,7 @@ const url = (v: string) => (/^[a-z]+:\/\//i.test(v) ? v : `https://${v}`);
       <h1>{b.name}</h1>
       <p class="headline">{b.headline}</p>
       <p class="meta">
-        {b.location} · <a href={`mailto:${b.email}`}>{b.email}</a> ·
+        {b.location} · <a href={`mailto:${b.email}`}>{b.email}</a>{' · '}
         <a href={url(b.linkedin)}>LinkedIn</a> · <a href={url(b.github)}>GitHub</a>
       </p>
     </header>
@@ -104,7 +104,7 @@ const url = (v: string) => (/^[a-z]+:\/\//i.test(v) ? v : `https://${v}`);
   .cv h3 { margin-top: 1rem; font-size: 1rem; }
   .cv .headline { margin: .2rem 0; font-size: 1.1rem; }
   .cv .meta { color: var(--muted); margin: .2rem 0; overflow-wrap: anywhere; }
-  .cv a { color: var(--accent); }
+  .cv a { color: var(--accent-ink); }
   .cv ul { padding-left: 1.2rem; margin: .4rem 0; }
   .cv .skills { columns: 2; }
   .cv li { overflow-wrap: anywhere; }

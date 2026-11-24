@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { createLofiEngine, type LofiEngine } from '../../audio/lofi-engine';
 import { readVolume, writeVolume } from '../../lib/volume';
+import '../../styles/player.css';
 import { TABS, parseHash, formatHash, stepItem, stepTab, type Counts, type DeckState, type TabId } from '../../lib/deck';
 
 type Props = {
@@ -121,8 +122,8 @@ export default function Player({ tabs, itemLabels }: Props) {
       </div>
       <div className="transport">
         <button type="button" aria-label="Previous item" onClick={() => go(stepItem(s, -1, counts))}>⏮</button>
-        <button type="button" aria-label="Next item" onClick={() => go(stepItem(s, 1, counts))}>⏭</button>
         <button type="button" aria-label={on ? 'Pause music' : 'Play music'} disabled={unavailable} onClick={toggle}>{on ? '❚❚' : '▶'}</button>
+        <button type="button" aria-label="Next item" onClick={() => go(stepItem(s, 1, counts))}>⏭</button>
         <input
           type="range" aria-label="Volume" min={0} max={1} step={0.01} value={vol}
           onChange={(e) => { const v = Number(e.target.value); setVol(v); writeVolume(v); engine.current?.setVolume(v); }}

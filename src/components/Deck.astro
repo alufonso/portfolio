@@ -15,14 +15,14 @@ import Stickers from './panels/Stickers.astro';
   #deck h2 { font-family: var(--font-pixel); font-size: 1.4rem; margin: 0 0 1rem; }
   #deck h3 { font-family: var(--font-serif); font-size: 1.15rem; margin: 0 0 .25rem; }
   #deck p, #deck li { font-family: var(--font-serif); line-height: 1.55; }
-  #deck article {
+  #deck article { overflow-wrap: anywhere;
     background: #fff9; border: 2px solid var(--ink); box-shadow: 3px 3px 0 var(--accent);
     padding: .9rem 1rem; margin: 0 0 1rem;
   }
   #deck .meta { color: var(--muted); font-size: .85rem; margin: 0 0 .5rem; }
   #deck .chips { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: .35rem; }
-  #deck .chips li { font: 600 .75rem var(--font-sans); border: 1px solid var(--line); padding: .1rem .45rem; }
-  #deck a { color: var(--accent); }
+  #deck .chips li { overflow-wrap: anywhere; min-width: 0; font: 600 .75rem var(--font-sans); border: 1px solid var(--line); padding: .1rem .45rem; }
+  #deck a { color: var(--accent-ink); overflow-wrap: anywhere; }
   #deck .cover { float: right; margin-left: 1rem; line-height: 0; }
   #deck .cover svg { display: block; }
   /* JS mode only: Player toggles .is-active and aria-current */

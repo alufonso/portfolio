@@ -14,3 +14,34 @@ test('client JS has no private data', () => {
     expect(src, f).not.toContain('alfonsoagustar');
   }
 });
+
+test('axe has no serious violations', async ({ page }) => {
+  const { default: AxeBuilder } = await import('@axe-core/playwright');
+  for (const url of ['/', '/cv', '/projects/cvsight']) {
+    await page.goto(url);
+    const { violations } = await new AxeBuilder({ page }).analyze();
+    const bad = violations
+      .filter((v) => ['serious', 'critical'].includes(v.impact ?? ''))
+      .map((v) => `${url} ${v.id}: ${v.nodes.map((n) => n.target.join(' ')).join(', ')}`);
+    expect(bad).toEqual([]);
+  }
+});
+
+test('no horizontal scroll at 320px', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 640 });
+  for (const url of ['/', '/cv']) {
+    await page.goto(url);
+    const sw = await page.evaluate(() => document.documentElement.scrollWidth);
+    expect(sw, url).toBeLessThanOrEqual(320);
+  }
+  await page.goto('/');
+  await expect(page.getByRole('link', { name: '⬇ CV' })).toBeInViewport();
+});
+
+test('long bullet wraps', async ({ page }) => {
+  await page.goto('/#playlist/0');
+  const a = page.locator('[data-panel="playlist"] article[aria-current="true"]');
+  await expect(a).toBeVisible();
+  const { sw, cw } = await a.evaluate((el) => ({ sw: el.scrollWidth, cw: el.clientWidth }));
+  expect(sw).toBeLessThanOrEqual(cw);
+});

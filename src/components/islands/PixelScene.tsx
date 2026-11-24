@@ -23,7 +23,7 @@ export default function PixelScene({ covers }: { covers: string[] }) {
 
   return (
     <div className="scene">
-      <svg viewBox="0 0 96 54" shapeRendering="crispEdges" aria-hidden="true" data-monitor={tab} data-cover={cover}>
+      <svg viewBox="0 0 96 54" preserveAspectRatio="xMidYMid slice" shapeRendering="crispEdges" aria-hidden="true" data-monitor={tab} data-cover={cover}>
         <Room>
           <Monitor tab={tab} />
           {/* Cover's own 32x32 viewBox scales it into the monitor's 10x10 slot at (60,13). */}

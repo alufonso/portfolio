@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { readFileSync } from 'node:fs';
 const profile = JSON.parse(readFileSync('src/data/profile.json', 'utf8'));
 
-const projects = profile.projects;
+const projects: { slug: string; name: string; case_study: { result?: string } }[] = profile.projects;
 
 test('every case study returns 200', async ({ page }) => {
   for (const p of projects) {
@@ -13,13 +13,13 @@ test('every case study returns 200', async ({ page }) => {
 });
 
 test('no result section when result missing', async ({ page }) => {
-  const p = projects.find((x) => !(x.case_study as any).result)!;
+  const p = projects.find((x) => !x.case_study.result)!;
   const res = await page.goto(`/projects/${p.slug}`);
   expect(res?.status()).toBe(200);
   await expect(page.locator('h1')).toHaveText(p.name);
   await expect(page.getByRole('heading', { name: 'Result' })).toHaveCount(0);
 
-  const withResult = projects.find((x) => (x.case_study as any).result)!;
+  const withResult = projects.find((x) => x.case_study.result)!;
   await page.goto(`/projects/${withResult.slug}`);
   await expect(page.getByRole('heading', { name: 'Result' })).toHaveCount(1);
 });
