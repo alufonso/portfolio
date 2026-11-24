@@ -3,7 +3,7 @@
     "name": "Agustar Alfonso",
     "email": "alfonsoagustar@gmail.com",
     "location": "Kecamatan Cikarang Selatan, West Java, Indonesia",
-    "summary": "I'm a Full-Stack & AI Engineer at Global Collabo Tech (Minori Group), where I build AI-powered products end to end, from the AI and backend services to the web and mobile apps people use.\nI like owning a feature from start to finish: understanding the problem, writing the spec, building it across the stack, testing it and seeing it through to release. I care about products that work reliably for real users, not just in a demo.\nI graduated in Informatics Engineering from UIN Sultan Syarif Kasim Riau (GPA 3.76). For my thesis, I fine-tuned an IndoBERT model for emotion classification in Indonesian song lyrics, published in a SINTA 3 journal. I also guided students through practicums as a laboratory assistant.\nTools I work with most: Python, TypeScript, FastAPI, Next.js, React Native, Flutter, PostgreSQL, Docker and cloud platforms such as Google Cloud.",
+    "summary": "I'm an Artificial Intelligence Engineer (Apprenticeship) at Global Collabo Tech (Minori Group), where I build AI-powered products end to end, from the AI and backend services to the web and mobile apps people use.\nI like owning a feature from start to finish: understanding the problem, writing the spec, building it across the stack, testing it and seeing it through to release. I care about products that work reliably for real users, not just in a demo.\nI graduated in Informatics Engineering from UIN Sultan Syarif Kasim Riau (GPA 3.76). For my thesis, I fine-tuned an IndoBERT model for emotion classification in Indonesian song lyrics, published in a SINTA 3 journal. I also guided students through practicums as a laboratory assistant.\nTools I work with most: Python, TypeScript, FastAPI, Next.js, React Native, Flutter, PostgreSQL, Docker and cloud platforms such as Google Cloud.",
     "github": "github.com/alufonso",
     "linkedin": "linkedin.com/in/agustaralfonso",
     "headline": "Full-stack & AI Engineer",
@@ -195,8 +195,14 @@
           "Built campaign sign-up and attribution tracking that follows a user from the website to the mobile app.",
           "Built analytics and user tracking with PostHog, plus relationship-graph and contact management features."
         ],
-        "links": []
-      }
+        "links": [
+          {
+            "label": "Website",
+            "url": "https://haloop.ai/"
+          }
+        ]
+      },
+      "link": "https://haloop.ai/"
     },
     {
       "slug": "petak-app",
@@ -225,8 +231,14 @@
           "Built secure phone-based sign-in with verification and cost controls.",
           "Built analytics dashboards and internal admin tools for the team."
         ],
-        "links": []
-      }
+        "links": [
+          {
+            "label": "Website",
+            "url": "https://petak.app/"
+          }
+        ]
+      },
+      "link": "https://petak.app/"
     },
     {
       "slug": "cvsight",
@@ -320,7 +332,8 @@
         "Developed and evaluated an emotion classification model for Indonesian song lyrics using fine-tuned IndoBERT-base-p2.",
         "Compiled a dataset of 1,025 labeled lyric entries covering four emotion categories: joy, sadness, fear, and anger.",
         "Best model configuration achieved 75.73% accuracy and 75.85% macro-averaged F1-score."
-      ]
+      ],
+      "link": "https://doi.org/10.59190/stc.v6i3.372"
     }
   ],
   "certificates": [
