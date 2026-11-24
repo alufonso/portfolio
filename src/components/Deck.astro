@@ -23,7 +23,8 @@ import Stickers from './panels/Stickers.astro';
   #deck .chips { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: .35rem; }
   #deck .chips li { font: 600 .75rem var(--font-sans); border: 1px solid var(--line); padding: .1rem .45rem; }
   #deck a { color: var(--accent); }
-  #deck .cover { width: 4rem; height: 4rem; border: 2px solid var(--ink); background: var(--night); float: right; margin-left: 1rem; }
+  #deck .cover { float: right; margin-left: 1rem; line-height: 0; }
+  #deck .cover svg { display: block; }
   /* JS mode only: Player toggles .is-active and aria-current */
   #deck[data-js] [data-panel]:not(.is-active) { display: none; }
   #deck[data-js] article:not([aria-current=true]) .detail { display: none; }

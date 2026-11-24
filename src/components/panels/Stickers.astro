@@ -1,11 +1,13 @@
 ---
 import { profile } from '../../data/profile';
+import { Badge } from '../../art/badges';
 ---
 
 <section data-panel="stickers" id="panel-stickers" aria-labelledby="tab-stickers">
   <h2>Stickers — Certificates</h2>
   {profile.certificates.map((c, i) => (
-    <article data-item={i} class={`badge-${c.badge}`} data-badge={c.badge}>
+    <article data-item={i}>
+      <div class="cover"><Badge id={c.badge} size={64} /></div>
       <h3>{c.name}</h3>
       <p class="meta">{c.issuer} · {c.date}</p>
       <div class="detail">
