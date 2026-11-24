@@ -39,6 +39,14 @@ const VARIANTS: Record<TabId, Px[]> = {
   stickers: [...badge(52, C.accent), ...badge(62, C.lamp), ...badge(72, C.line)],
 };
 
+// Visualizer: 4 bars in the screen's bottom-right corner (clear of the head), shown only while music plays.
+const BARS: Px[] = [[73, 25, 1, 5, C.accentLight], [75, 26, 1, 4, C.lamp], [77, 24, 1, 6, C.accentLight], [79, 27, 1, 3, C.lamp]];
+
 export default function Monitor({ tab }: { tab: TabId }) {
-  return <g className="monitor">{px(VARIANTS[tab])}</g>;
+  return (
+    <>
+      <g className="monitor">{px(VARIANTS[tab])}</g>
+      <g className="viz">{px(BARS)}</g>
+    </>
+  );
 }

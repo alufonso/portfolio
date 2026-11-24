@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { createLofiEngine, type LofiEngine } from '../../audio/lofi-engine';
 import { readVolume, writeVolume } from '../../lib/volume';
 import '../../styles/player.css';
+import { C, px, type Px } from '../../art/scene/room';
 import { TABS, parseHash, formatHash, stepItem, stepTab, type Counts, type DeckState, type TabId } from '../../lib/deck';
 
 type Props = {
@@ -10,6 +11,25 @@ type Props = {
 };
 
 const CRT_KEY = 'lofi-crt';
+
+// Original 32x20 pixel cassette. Each reel is a 5x5 ring with one spoke, so 90deg steps read as spinning.
+const shell: Px[] = [
+  [1, 0, 30, 1, C.ink], [0, 1, 32, 18, C.ink], [1, 19, 30, 1, C.ink],
+  [1, 1, 30, 18, C.accent], [2, 2, 1, 1, C.accentDark], [29, 2, 1, 1, C.accentDark],
+  [3, 2, 26, 11, C.paper], [5, 3, 22, 1, C.accentLight],
+  [8, 5, 16, 7, C.night], [14, 10, 4, 1, C.woodDark],
+  [6, 15, 20, 4, C.gear], [9, 16, 2, 2, C.ink], [21, 16, 2, 2, C.ink],
+];
+const reelPx: Px[] = [
+  [1, 0, 3, 1, C.line], [0, 1, 1, 3, C.line], [4, 1, 1, 3, C.line], [1, 4, 3, 1, C.line],
+  [2, 2, 1, 1, C.line], [2, 1, 1, 1, C.lamp],
+];
+const Cassette = () => (
+  <svg className="cassette" viewBox="0 0 32 20" width="48" height="30" shapeRendering="crispEdges" aria-hidden="true" focusable="false">
+    {px(shell)}
+    {[9, 18].map((x) => <g key={x} transform={`translate(${x} 6)`}><g className="reel">{px(reelPx)}</g></g>)}
+  </svg>
+);
 const same = (a: DeckState, b: DeckState) => a.tab === b.tab && a.item === b.item;
 
 export default function Player({ tabs, itemLabels }: Props) {
@@ -77,6 +97,12 @@ export default function Player({ tabs, itemLabels }: Props) {
 
   // The scene island draws the overlay; it keys on html[data-crt].
   useEffect(() => { document.documentElement.toggleAttribute('data-crt', crt); }, [crt]);
+  // The scene and cassette key on html[data-playing]; on is true only after start() resolved with sound.
+  useEffect(() => {
+    const h = document.documentElement;
+    h.toggleAttribute('data-playing', on);
+    return () => h.removeAttribute('data-playing');
+  }, [on]);
 
   const toggleCrt = () => {
     setCrt(!crt);
@@ -154,7 +180,10 @@ export default function Player({ tabs, itemLabels }: Props) {
         {unavailable && <span role="status">Audio unavailable</span>}
         <button type="button" className="crt-toggle px-corners px-shadow" aria-pressed={crt} onClick={toggleCrt}>CRT effect</button>
       </div>
-      <p data-testid="track-label" className="track">{`${twin} · ${nn} ${label}`}</p>
+      <div className="now">
+        <Cassette />
+        <p data-testid="track-label" className="track">{`${twin} · ${nn} ${label}`}</p>
+      </div>
       <progress value={s.item + 1} max={counts[s.tab]} aria-label="Position in list" />
     </div>
   );

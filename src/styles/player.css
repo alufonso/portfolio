@@ -63,3 +63,13 @@
 .player progress::-webkit-progress-bar { background: var(--line); }
 .player progress::-webkit-progress-value { background: var(--accent); }
 .player progress::-moz-progress-bar { background: var(--accent); }
+
+/* Cassette + track label. Reels spin in 90deg steps only while html[data-playing]. */
+.player .now { display: flex; align-items: center; gap: .6rem; min-width: 0; }
+.player .now .track { flex: 1; min-width: 0; }
+.player .cassette { flex: none; display: block; image-rendering: pixelated; }
+.player .cassette .reel { transform-box: fill-box; transform-origin: center; }
+@media (prefers-reduced-motion: no-preference) {
+  html[data-playing] .player .cassette .reel { animation: reel .8s steps(4) infinite; }
+}
+@keyframes reel { to { transform: rotate(360deg); } }

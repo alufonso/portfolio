@@ -42,3 +42,35 @@ html[data-crt] .crt { display: block; }
 @media (prefers-reduced-motion: reduce) {
   .rain, .steam, .lamp, .screen-flicker, .crt .grain { animation: none; }
 }
+
+/* Music (Player sets html[data-playing]): denser steam, visualizer bars; motion only without reduced motion. */
+.scene .viz, .scene .steam-more { display: none; }
+html[data-playing] .scene .viz, html[data-playing] .scene .steam-more { display: inline; }
+
+/* Cat: shut eyes asleep; open eyes while svg[data-cat=awake] (static frame under reduced motion). */
+.scene .cat-eyes-open, .scene svg[data-cat=awake] .cat-eyes-shut { display: none; }
+.scene svg[data-cat=awake] .cat-eyes-open { display: inline; }
+
+@media (prefers-reduced-motion: no-preference) {
+  html[data-playing] .scene .head { animation: bob .8s steps(1) infinite; }
+  html[data-playing] .scene .steam { animation-duration: 1.6s; }
+  .scene .viz rect { transform-box: fill-box; transform-origin: bottom; animation: viz .8s steps(3) infinite alternate; }
+  .scene .viz rect:nth-child(2) { animation-delay: -.3s; }
+  .scene .viz rect:nth-child(3) { animation-delay: -.55s; animation-duration: .6s; }
+  .scene .viz rect:nth-child(4) { animation-delay: -.15s; }
+  .scene .cat-body { animation: breathe 3.2s steps(1) infinite; }
+  .scene .cat-eyes-open { animation: blink 3s steps(1) infinite; }
+}
+@keyframes bob { 50% { transform: translateY(1px); } }
+@keyframes viz { from { transform: scaleY(.34); } to { transform: scaleY(1); } }
+@keyframes breathe { 50% { transform: translateY(-1px); } }
+@keyframes blink { 0%, 100% { opacity: 1; } 40% { opacity: 0; } 46% { opacity: 1; } }
+
+/* Pet button: an invisible hit area over the cat (x 74..86, y 30..36 of 96x54), outlined on keyboard focus. */
+.scene .sr-only-focusable {
+  position: absolute; left: calc(74 / 96 * 100%); top: calc(30 / 54 * 100%);
+  width: calc(12 / 96 * 100%); height: calc(7 / 54 * 100%);
+  padding: 0; border: 0; background: none; cursor: pointer;
+}
+.scene .sr-only-focusable:focus-visible { outline: 2px dashed var(--lamp); outline-offset: 1px; }
+

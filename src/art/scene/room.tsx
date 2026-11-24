@@ -10,6 +10,7 @@ export const C = {
   bezel: '#1b1820', screen: '#24304a', gear: '#3a3040', gearLight: '#4d4258',
   // time-of-day shades (see PHASES)
   wallMorning: '#4b4560', glassMorning: '#9aa6b8', horizonMorning: '#b9c0c9', cityMorning: '#6d6f86',
+  catFur: '#9a909e', catShade: '#6a6274',
   wallDusk: '#3d2a40', glassDusk: '#5e3f63', horizonDusk: '#d9824a', cityDusk: '#3a2638',
 };
 
@@ -75,6 +76,21 @@ const desk: Px[] = [
 ];
 
 const steam: Px[] = [[41, 28, 1, 2, C.line, 0.6], [42, 26, 1, 2, C.line, 0.5], [41, 24, 1, 2, C.line, 0.35]];
+// Extra puffs shown only while music plays.
+const steamMore: Px[] = [[43, 27, 1, 2, C.line, 0.5], [40, 25, 1, 2, C.line, 0.4], [43, 23, 1, 1, C.line, 0.3]];
+
+// Sleeping cat on the desk between mouse and lamp (x 75..84, y 32..35): 3x3 face on the left, body behind.
+const cat: Px[] = [
+  [75, 32, 1, 1, C.catFur], [77, 32, 1, 1, C.catFur], // ears
+  [75, 33, 3, 2, C.catFur], [76, 34, 1, 1, C.accentLight], // face + nose
+  [78, 33, 1, 2, C.catShade], // neck shadow splits face from body
+  [79, 33, 6, 2, C.catFur], [81, 34, 1, 1, C.catShade], [83, 33, 1, 1, C.catShade], // body + stripes
+  [75, 35, 3, 1, C.catFur], [78, 35, 7, 1, C.catShade], // paws + tail along the front
+];
+// Back hump: rises 1px on each breath.
+const catBack: Px[] = [[80, 32, 4, 1, C.catFur], [80, 33, 4, 1, C.catFur], [83, 33, 1, 1, C.catShade]];
+const catEyesShut: Px[] = [[75, 33, 1, 1, C.gear], [77, 33, 1, 1, C.gear]];
+const catEyesOpen: Px[] = [[75, 33, 1, 1, C.lamp], [77, 33, 1, 1, C.lamp]];
 
 const monitorBody: Px[] = [
   [46, 8, 38, 26, '#3a4466', 0.25], // glow on the wall
@@ -106,12 +122,19 @@ const figure: Px[] = [
   [50, 35, 2, 12, C.accentDark], [70, 35, 2, 12, C.accentLight], [60, 37, 2, 10, C.accentDark],
   // hood bunched behind the neck
   [55, 31, 12, 3, C.accentDark], [57, 33, 8, 1, C.accentDeep], [56, 34, 10, 1, C.accentDark],
-  // head (hair, from behind)
+];
+
+// Head + headphones: its own group so it can bob to the music.
+const head: Px[] = [
+  // hair, from behind
   [58, 24, 6, 1, C.ink], [57, 25, 8, 1, C.ink], [56, 26, 10, 5, C.ink],
   [59, 25, 3, 1, '#3d3430'], [57, 27, 2, 1, '#3d3430'], [65, 27, 1, 3, '#5a3f2a'],
   // headphones
   [57, 23, 8, 1, C.gear], [56, 24, 1, 2, C.gear], [65, 24, 1, 2, C.gear],
   [54, 26, 2, 4, C.gear], [66, 26, 2, 4, C.gear], [67, 27, 1, 2, C.lamp], [54, 27, 1, 2, C.gearLight],
+];
+
+const chair: Px[] = [
   // chair back in front of the lower back
   [54, 41, 14, 1, C.gear], [53, 42, 16, 6, C.gear], [67, 42, 1, 5, C.gearLight],
   [60, 48, 2, 3, C.bezel], [55, 51, 12, 1, C.bezel], [55, 52, 1, 1, C.bezel], [66, 52, 1, 1, C.bezel],
@@ -133,13 +156,21 @@ export default function Room({ children }: { children: ReactNode }) {
       <g clipPath="url(#glass)"><g className="rain">{px(rain)}</g></g>
       {px(windowFront)}
       {px(desk)}
-      <g className="steam">{px(steam)}</g>
+      <g className="steam">{px(steam)}<g className="steam-more">{px(steamMore)}</g></g>
       {px(monitorBody)}
       {children}
       <rect className="screen-flicker" x="50" y="12" width="30" height="18" fill={C.paper} opacity="0.04" />
       {px(figure)}
+      <g className="head">{px(head)}</g>
+      {px(chair)}
       <g className="lamp-phase"><g className="lamp">{px(lampGlow)}</g></g>
       {px(lampBody)}
+      <g className="cat">
+        {px(cat)}
+        <g className="cat-body">{px(catBack)}</g>
+        <g className="cat-eyes-shut">{px(catEyesShut)}</g>
+        <g className="cat-eyes-open">{px(catEyesOpen)}</g>
+      </g>
     </>
   );
 }
