@@ -1,0 +1,51 @@
+import { test, expect } from '@playwright/test';
+
+const count = `(() => {
+  window.__ac = 0;
+  const Orig = window.AudioContext;
+  if (Orig) window.AudioContext = class extends Orig { constructor(...a) { super(...a); window.__ac++; } };
+})();`;
+
+test.beforeEach(async ({ page }) => { await page.addInitScript(count); });
+
+test('no audio context before click', async ({ page }) => {
+  await page.goto('/');
+  await page.waitForTimeout(1000);
+  expect(await page.evaluate(() => (window as any).__ac)).toBe(0);
+});
+
+test('play creates context and toggles label', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: 'Play music' }).click();
+  await expect(page.getByRole('button', { name: 'Pause music' })).toBeVisible();
+  expect(await page.evaluate(() => (window as any).__ac)).toBe(1);
+});
+
+test('hidden tab stops and does not resume', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: 'Play music' }).click();
+  await expect(page.getByRole('button', { name: 'Pause music' })).toBeVisible();
+  const fire = (state: string) => page.evaluate((s) => {
+    Object.defineProperty(document, 'visibilityState', { configurable: true, get: () => s });
+    document.dispatchEvent(new Event('visibilitychange'));
+  }, state);
+  await fire('hidden');
+  await expect(page.getByRole('button', { name: 'Play music' })).toBeVisible();
+  await fire('visible');
+  await expect(page.getByRole('button', { name: 'Play music' })).toBeVisible();
+});
+
+test('blocked audio shows unavailable', async ({ page }) => {
+  await page.addInitScript(() => { (window as any).AudioContext = undefined; (window as any).webkitAudioContext = undefined; });
+  await page.goto('/');
+  await page.getByRole('button', { name: 'Play music' }).click();
+  await expect(page.getByText('Audio unavailable')).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Play music' })).toBeDisabled();
+});
+
+test('volume slider arrows do not move items', async ({ page }) => {
+  await page.goto('/#playlist/1');
+  await page.getByRole('slider', { name: 'Volume' }).focus();
+  await page.keyboard.press('ArrowLeft');
+  await expect(page.locator('[data-panel=playlist] [data-item="1"]')).toHaveAttribute('aria-current', 'true');
+});
