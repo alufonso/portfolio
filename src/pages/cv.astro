@@ -8,6 +8,7 @@ const url = (v: string) => (/^[a-z]+:\/\//i.test(v) ? v : `https://${v}`);
 
 <Layout title="Agustar Alfonso — CV" description={`${b.name}, ${b.headline}. Plain printable CV.`}>
   <main class="cv">
+    <p class="topbar no-print"><a href="/">◀ Player</a> · <a href={`mailto:${b.email}`}>Contact</a></p>
     <header>
       <h1>{b.name}</h1>
       <p class="headline">{b.headline}</p>
@@ -104,6 +105,7 @@ const url = (v: string) => (/^[a-z]+:\/\//i.test(v) ? v : `https://${v}`);
   .cv h3 { margin-top: 1rem; font-size: 1rem; }
   .cv .headline { margin: .2rem 0; font-size: 1.1rem; }
   .cv .meta { color: var(--muted); margin: .2rem 0; overflow-wrap: anywhere; }
+  .cv .topbar { margin: 0 0 1rem; font: 600 .9rem var(--font-sans); }
   .cv a { color: var(--accent-ink); }
   .cv ul { padding-left: 1.2rem; margin: .4rem 0; }
   .cv .skills { columns: 2; }

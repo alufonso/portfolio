@@ -1,6 +1,8 @@
 import { test, expect } from '@playwright/test';
 import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { MOBILE } from './privacy';
+import { gotoHydrated } from './hydrated';
 
 // Reads dist/ built by the Playwright webServer (build + preview).
 test('client JS has no private data', () => {
@@ -10,7 +12,7 @@ test('client JS has no private data', () => {
   for (const f of files) {
     const src = readFileSync(join(dir, f), 'utf8');
     expect(src, f).not.toMatch(/["']phone["']\s*:|\bphone\s*:/);
-    expect(src, f).not.toContain('PHONE_REDACTED');
+    expect(src, f).not.toMatch(MOBILE);
     expect(src, f).not.toContain('alfonsoagustar');
   }
 });
@@ -18,7 +20,7 @@ test('client JS has no private data', () => {
 test('axe has no serious violations', async ({ page }) => {
   const { default: AxeBuilder } = await import('@axe-core/playwright');
   for (const url of ['/', '/cv', '/projects/cvsight']) {
-    await page.goto(url);
+    if (url === '/') await gotoHydrated(page, url); else await page.goto(url);
     const { violations } = await new AxeBuilder({ page }).analyze();
     const bad = violations
       .filter((v) => ['serious', 'critical'].includes(v.impact ?? ''))
@@ -39,9 +41,10 @@ test('no horizontal scroll at 320px', async ({ page }) => {
 });
 
 test('long bullet wraps', async ({ page }) => {
-  await page.goto('/#playlist/0');
+  await gotoHydrated(page, '/#playlist/0');
   const a = page.locator('[data-panel="playlist"] article[aria-current="true"]');
   await expect(a).toBeVisible();
+  await a.locator('li').first().evaluate((li) => { li.textContent += ' ' + 'x'.repeat(200); });
   const { sw, cw } = await a.evaluate((el) => ({ sw: el.scrollWidth, cw: el.clientWidth }));
   expect(sw).toBeLessThanOrEqual(cw);
 });

@@ -2,7 +2,7 @@
 import { profile } from '../../data/profile';
 ---
 
-<section data-panel="playlist" id="panel-playlist" aria-labelledby="tab-playlist">
+<section role="tabpanel" data-panel="playlist" id="panel-playlist" aria-labelledby="tab-playlist">
   <h2>Playlist — Experience</h2>
   {profile.work_experience.map((w, i) => (
     <article data-item={i}>

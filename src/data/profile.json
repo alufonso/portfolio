@@ -173,7 +173,6 @@
     {
       "slug": "haloop-ai",
       "name": "Haloop.AI",
-      "featured": true,
       "cover": "cover-haloop-ai",
       "technologies": [
         "LangGraph",
@@ -202,7 +201,6 @@
     {
       "slug": "petak-app",
       "name": "Petak-app",
-      "featured": true,
       "cover": "cover-petak-app",
       "technologies": [
         "React Native",
@@ -233,7 +231,6 @@
     {
       "slug": "cvsight",
       "name": "CVSight",
-      "featured": true,
       "cover": "cover-cvsight",
       "repo": "https://github.com/alufonso/cv-reviewer-agent",
       "technologies": [
@@ -266,7 +263,6 @@
     {
       "slug": "indobert-lyrics",
       "name": "IndoBERT Lyric-Emotion Research",
-      "featured": true,
       "cover": "cover-indobert-lyrics",
       "technologies": [
         "Python",
@@ -289,7 +285,6 @@
     {
       "slug": "jankenpovision",
       "name": "JankenpoVision",
-      "featured": true,
       "cover": "cover-jankenpovision",
       "link": "https://jankenpo.vercel.app/",
       "technologies": [

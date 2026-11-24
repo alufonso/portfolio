@@ -3,7 +3,7 @@ import { profile } from '../../data/profile';
 import { Cover } from '../../art/covers';
 ---
 
-<section data-panel="singles" id="panel-singles" aria-labelledby="tab-singles">
+<section role="tabpanel" data-panel="singles" id="panel-singles" aria-labelledby="tab-singles">
   <h2>Singles — Projects</h2>
   {profile.projects.map((p, i) => (
     <article data-item={i}>

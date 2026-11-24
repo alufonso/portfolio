@@ -21,11 +21,13 @@ export default function Player({ tabs, itemLabels }: Props) {
   const [on, setOn] = useState(false);
   const [unavailable, setUnavailable] = useState(false);
   const [vol, setVol] = useState(0.5);
+  const scrollNext = useRef(false); // set by user-driven changes only, so mount/deep-link never scrolls
 
   // Single entry point for user-driven changes: update state, write hash, notify other islands.
   const go = useCallback((next: DeckState, focusTab = false) => {
     if (same(next, ref.current)) return;
     ref.current = next;
+    scrollNext.current = true;
     setS(next);
     history.replaceState(null, '', formatHash(next));
     window.dispatchEvent(new HashChangeEvent('hashchange'));
@@ -33,7 +35,10 @@ export default function Player({ tabs, itemLabels }: Props) {
   }, []);
 
   useEffect(() => {
-    document.getElementById('deck')?.setAttribute('data-js', '');
+    const deck = document.getElementById('deck');
+    deck?.setAttribute('data-js', '');
+    // Panels become keyboard-reachable once JS shows one at a time.
+    deck?.querySelectorAll<HTMLElement>('[data-panel]').forEach((p) => p.setAttribute('tabindex', '0'));
     const fromHash = () => {
       const next = parseHash(location.hash, countsRef.current);
       if (same(next, ref.current)) return; // our own dispatch lands here: no-op
@@ -81,6 +86,12 @@ export default function Player({ tabs, itemLabels }: Props) {
         else a.removeAttribute('aria-current');
       });
     });
+    if (scrollNext.current) {
+      scrollNext.current = false;
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      deck.querySelector('[data-panel].is-active [data-item][aria-current="true"]')
+        ?.scrollIntoView({ block: 'nearest', behavior: reduce ? 'auto' : 'smooth' });
+    }
   }, [s]);
 
   const onTabKey = (e: React.KeyboardEvent) => {

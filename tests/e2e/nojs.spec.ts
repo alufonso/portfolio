@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { MOBILE } from './privacy';
 
 test.use({ javaScriptEnabled: false });
 
@@ -39,5 +40,11 @@ test('action links work without JS', async ({ page }) => {
 
 test('no phone number anywhere', async ({ page }) => {
   await page.goto('/');
-  expect(await page.content()).not.toContain('PHONE_REDACTED');
+  expect(await page.content()).not.toMatch(MOBILE);
+});
+
+test('player controls are hidden without JS', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.getByRole('tablist')).toBeHidden();
+  await expect(page.getByRole('button', { name: 'Next item' })).toBeHidden();
 });

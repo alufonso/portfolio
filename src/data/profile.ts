@@ -2,6 +2,7 @@ import { z } from 'zod';
 import data from './profile.json';
 
 const bullets = z.array(z.string().min(1));
+// link/repo and basic_info.portfolio are reserved for the owner to fill in later; not rendered yet.
 const link = z.string().min(1).optional();
 
 export const ProfileSchema = z.object({
@@ -23,7 +24,7 @@ export const ProfileSchema = z.object({
     role: z.string(), organization: z.string(), duration: z.string(), bullets,
   }).strict()),
   projects: z.array(z.object({
-    slug: z.string(), name: z.string(), featured: z.boolean(), cover: z.string(),
+    slug: z.string(), name: z.string(), cover: z.string(),
     technologies: z.array(z.string()), link, repo: link,
     case_study: z.object({
       summary: z.string(), role: z.string(), problem: z.string(),

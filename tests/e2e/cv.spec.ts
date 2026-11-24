@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { MOBILE } from './privacy';
 
 test.use({ javaScriptEnabled: false });
 
@@ -22,9 +23,10 @@ test('cv lists all 32 skills, projects link to case studies, no JS', async ({ pa
 
 test('cv has mailto and external links, never the phone', async ({ page }) => {
   await page.goto('/cv');
-  await expect(page.locator('a[href^="mailto:"]')).toHaveCount(1);
+  // header contact line + top bar
+  await expect(page.locator('a[href^="mailto:"]')).toHaveCount(2);
   await expect(page.locator('a[href^="https://"]').first()).toBeVisible();
-  expect(await page.content()).not.toContain('PHONE_REDACTED');
+  expect(await page.content()).not.toMatch(MOBILE);
 });
 
 test('print media has no panels or monitor', async ({ page }) => {

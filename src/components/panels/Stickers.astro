@@ -3,7 +3,7 @@ import { profile } from '../../data/profile';
 import { Badge } from '../../art/badges';
 ---
 
-<section data-panel="stickers" id="panel-stickers" aria-labelledby="tab-stickers">
+<section role="tabpanel" data-panel="stickers" id="panel-stickers" aria-labelledby="tab-stickers">
   <h2>Stickers — Certificates</h2>
   {profile.certificates.map((c, i) => (
     <article data-item={i}>

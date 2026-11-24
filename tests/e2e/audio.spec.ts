@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { gotoHydrated } from './hydrated';
 
 const count = `(() => {
   window.__ac = 0;
@@ -9,20 +10,20 @@ const count = `(() => {
 test.beforeEach(async ({ page }) => { await page.addInitScript(count); });
 
 test('no audio context before click', async ({ page }) => {
-  await page.goto('/');
+  await gotoHydrated(page, '/');
   await page.waitForTimeout(1000);
   expect(await page.evaluate(() => (window as any).__ac)).toBe(0);
 });
 
 test('play creates context and toggles label', async ({ page }) => {
-  await page.goto('/');
+  await gotoHydrated(page, '/');
   await page.getByRole('button', { name: 'Play music' }).click();
   await expect(page.getByRole('button', { name: 'Pause music' })).toBeVisible();
   expect(await page.evaluate(() => (window as any).__ac)).toBe(1);
 });
 
 test('hidden tab stops and does not resume', async ({ page }) => {
-  await page.goto('/');
+  await gotoHydrated(page, '/');
   await page.getByRole('button', { name: 'Play music' }).click();
   await expect(page.getByRole('button', { name: 'Pause music' })).toBeVisible();
   const fire = (state: string) => page.evaluate((s) => {
@@ -37,14 +38,14 @@ test('hidden tab stops and does not resume', async ({ page }) => {
 
 test('blocked audio shows unavailable', async ({ page }) => {
   await page.addInitScript(() => { (window as any).AudioContext = undefined; (window as any).webkitAudioContext = undefined; });
-  await page.goto('/');
+  await gotoHydrated(page, '/');
   await page.getByRole('button', { name: 'Play music' }).click();
   await expect(page.getByText('Audio unavailable')).toBeVisible();
   await expect(page.getByRole('button', { name: 'Play music' })).toBeDisabled();
 });
 
 test('volume slider arrows do not move items', async ({ page }) => {
-  await page.goto('/#playlist/1');
+  await gotoHydrated(page, '/#playlist/1');
   await page.getByRole('slider', { name: 'Volume' }).focus();
   await page.keyboard.press('ArrowLeft');
   await expect(page.locator('[data-panel=playlist] [data-item="1"]')).toHaveAttribute('aria-current', 'true');
@@ -55,7 +56,7 @@ test('hidden while resume is pending never starts music', async ({ page }) => {
     const r = AudioContext.prototype.resume;
     AudioContext.prototype.resume = function () { return new Promise((ok) => setTimeout(ok, 300)).then(() => r.call(this)); };
   });
-  await page.goto('/');
+  await gotoHydrated(page, '/');
   await page.getByRole('button', { name: 'Play music' }).click();
   await page.evaluate(() => {
     Object.defineProperty(document, 'visibilityState', { configurable: true, get: () => 'hidden' });

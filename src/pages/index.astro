@@ -7,7 +7,9 @@ import PixelScene from '../components/islands/PixelScene';
 import { profile } from '../data/profile';
 
 const b = profile.basic_info;
-const cv = existsSync('public/cv.pdf') ? '/cv.pdf' : '/cv';
+// shortcut: this path is cwd-relative (fine for npm scripts and Vercel, wrong if built from another dir); use astro publicDir if that matters.
+const hasPdf = existsSync('public/cv.pdf');
+const cv = hasPdf ? '/cv.pdf' : '/cv';
 const tabs = [
   { id: 'now-playing', twin: 'Now Playing', plain: 'About' },
   { id: 'playlist', twin: 'Playlist', plain: 'Experience' },
@@ -34,13 +36,14 @@ const linkedin = /^[a-z]+:\/\//i.test(b.linkedin) ? b.linkedin : `https://${b.li
   title="Agustar Alfonso — Full-stack & AI Engineer"
   description="Portfolio of Agustar Alfonso, full-stack and AI engineer."
 >
+  <noscript><style>.player .tabs, .player .transport { display: none; }</style></noscript>
   <main class="shell">
     <div class="left">
       <h1>{b.name}</h1>
       <PixelScene client:load covers={profile.projects.map((p) => p.cover)} />
       <Player client:load tabs={[...tabs]} itemLabels={itemLabels} />
       <nav aria-label="Actions">
-        <a href={cv}>⬇ CV</a>
+        <a href={cv} download={hasPdf ? true : undefined}>⬇ CV</a>
         <a href="/cv">≡ Plain CV</a>
         <a href={`mailto:${b.email}`}>✉ Contact</a>
         <a href={linkedin}>LinkedIn</a>

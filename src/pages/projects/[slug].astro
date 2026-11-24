@@ -3,6 +3,8 @@ import Layout from '../../components/Layout.astro';
 import { Cover } from '../../art/covers';
 import { profile } from '../../data/profile';
 
+const email = profile.basic_info.email; // static HTML only, never island props
+
 export function getStaticPaths() {
   return profile.projects.map((p) => ({ params: { slug: p.slug }, props: { p } }));
 }
@@ -15,7 +17,7 @@ const c = p.case_study;
     <header class="player">
       <Cover id={p.cover} size={128} />
       <div>
-        <a href="/#singles">◀ Back to Singles</a>
+        <a href="/#singles">◀ Back to Singles</a> · <a href="/cv">CV</a> · <a href={`mailto:${email}`}>Contact</a>
         <h1>{p.name}</h1>
         <p class="role">{c.role}</p>
       </div>

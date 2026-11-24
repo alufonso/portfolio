@@ -1,13 +1,15 @@
 ---
 import { profile } from '../../data/profile';
 const b = profile.basic_info;
+const bio = b.summary.split('\n').slice(0, 2);
 const url = (v: string) => (/^[a-z]+:\/\//i.test(v) ? v : `https://${v}`);
 ---
 
-<section data-panel="now-playing" id="panel-now-playing" aria-labelledby="tab-now-playing">
+<section role="tabpanel" data-panel="now-playing" id="panel-now-playing" aria-labelledby="tab-now-playing">
   <h2>Now Playing — About</h2>
   <p><strong>{b.headline}</strong></p>
-  <p>{b.summary}</p>
+  {bio.map((t) => <p>{t}</p>)}
+  <p class="meta">Open to: {b.open_to}</p>
   <p class="meta">{b.location}</p>
   <p><a href={url(b.linkedin)}>LinkedIn</a> · <a href={url(b.github)}>GitHub</a></p>
   <h3>Top skills</h3>
