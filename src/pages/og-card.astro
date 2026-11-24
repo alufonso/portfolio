@@ -1,0 +1,48 @@
+---
+// Source of public/og.png (npm run og). Removed from normal builds by astro.config.mjs.
+// Shows only name + headline from profile and the night scene: never email or phone.
+import '@fontsource/pixelify-sans/700.css';
+import '../styles/tokens.css';
+import Room from '../art/scene/room';
+import Monitor from '../art/scene/monitor';
+import '../art/scene/scene.css';
+import { profile } from '../data/profile';
+
+const { name, headline } = profile.basic_info;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <title>OG card</title>
+  </head>
+  <body>
+    <main class="card">
+      <div class="scene">
+        <svg viewBox="0 0 96 54" preserveAspectRatio="xMidYMid slice" shape-rendering="crispEdges" aria-hidden="true" data-phase="night" data-cat="asleep">
+          <Room><Monitor tab="now-playing" /></Room>
+        </svg>
+      </div>
+      <div class="caption">
+        <h1>{name}</h1>
+        <p>{headline}</p>
+      </div>
+    </main>
+  </body>
+</html>
+
+<style>
+  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; background: var(--ink); }
+  .card { display: grid; grid-template-rows: 1fr auto; width: 1200px; height: 630px; box-sizing: border-box; border: 8px solid var(--ink); }
+  .scene { position: relative; min-height: 0; margin: 0; }
+  .scene svg { display: block; width: 100%; height: 100%; box-shadow: none; }
+  .caption {
+    display: grid; gap: 14px; white-space: nowrap;
+    padding: 24px 40px 28px; box-shadow: inset 12px 0 0 var(--accent); background: var(--paper); border-top: 8px solid var(--ink);
+    font-family: var(--font-pixel); color: var(--ink);
+  }
+  h1 { margin: 0; font-size: 88px; font-weight: 700; line-height: 1; }
+  p { margin: 0; font-size: 44px; font-weight: 700; color: var(--accent-ink); line-height: 1; }
+</style>
