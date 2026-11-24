@@ -37,7 +37,7 @@ const linkedin = /^[a-z]+:\/\//i.test(b.linkedin) ? b.linkedin : `https://${b.li
   <main class="shell">
     <div class="left">
       <h1>{b.name}</h1>
-      <PixelScene client:load />
+      <PixelScene client:load covers={profile.projects.map((p) => p.cover)} />
       <Player client:load tabs={[...tabs]} itemLabels={itemLabels} />
       <nav aria-label="Actions">
         <a href={cv}>⬇ CV</a>

@@ -21,3 +21,10 @@ test('scene is hidden from screen readers', async ({ page }) => {
   await expect(scene(page)).toHaveAttribute('aria-hidden', 'true');
   await expect(page.getByText('Pixel art: Agustar coding at night by a rainy window')).toHaveCount(1);
 });
+
+test('singles monitor shows the selected cover', async ({ page }) => {
+  await page.goto('/#singles/2');
+  await expect(scene(page)).toHaveAttribute('data-cover', 'cover-cvsight');
+  await page.getByRole('button', { name: 'Next item' }).click();
+  await expect(scene(page)).toHaveAttribute('data-cover', 'cover-indobert-lyrics');
+});

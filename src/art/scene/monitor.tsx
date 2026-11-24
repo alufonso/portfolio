@@ -28,10 +28,8 @@ const VARIANTS: Record<TabId, Px[]> = {
     [56, 20, 9, 1, C.lamp], [66, 20, 1, 1, C.line],
     [52, 22, 2, 1, C.line],
   ],
+  // The selected cover is drawn at (60,13) 10x10 by PixelScene; this is just its caption.
   singles: [
-    [60, 13, 10, 10, C.accent],
-    [63, 15, 4, 1, C.ink], [62, 16, 6, 4, C.ink], [63, 20, 4, 1, C.ink],
-    [64, 17, 2, 2, C.lamp], [60, 13, 10, 1, C.accentLight],
     [72, 15, 5, 1, C.line], [72, 17, 4, 1, C.muted], [72, 19, 5, 1, C.muted],
   ],
   'liner-notes': [
