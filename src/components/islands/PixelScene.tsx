@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { phaseForHour, type Phase } from '../../lib/phase';
 import { TABS, parseHash, type Counts, type DeckState } from '../../lib/deck';
 import Room from '../../art/scene/room';
@@ -25,6 +25,26 @@ export default function PixelScene({ covers }: { covers: string[] }) {
   useEffect(() => { setPhase(phaseForHour(new Date().getHours())); setLive(true); }, []);
   useEffect(() => () => clearTimeout(catTimer.current), []);
 
+  // The scene is cropped (slice) on phones, so viewBox percentages drift; place the pet button
+  // over the cat's real rendered box instead, and re-measure whenever the scene resizes.
+  const sceneRef = useRef<HTMLDivElement>(null);
+  const [catBox, setCatBox] = useState<CSSProperties>();
+  useEffect(() => {
+    const el = sceneRef.current;
+    const cat = el?.querySelector('svg .cat');
+    if (!live || !el || !cat) return;
+    const place = () => {
+      const s = el.getBoundingClientRect();
+      const c = cat.getBoundingClientRect();
+      const pad = 4;
+      setCatBox({ left: c.left - s.left - pad, top: c.top - s.top - pad, width: c.width + 2 * pad, height: c.height + 2 * pad });
+    };
+    place();
+    const ro = new ResizeObserver(place);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [live]);
+
   // Each pet restarts the ~3 s awake window.
   const pet = () => {
     clearTimeout(catTimer.current);
@@ -44,7 +64,7 @@ export default function PixelScene({ covers }: { covers: string[] }) {
   const cover = tab === 'singles' ? covers[state.item] : undefined;
 
   return (
-    <div className="scene">
+    <div className="scene" ref={sceneRef}>
       <svg viewBox="0 0 96 54" preserveAspectRatio="xMidYMid slice" shapeRendering="crispEdges" aria-hidden="true" data-phase={phase} data-monitor={tab} data-cover={cover} data-cat={awake ? 'awake' : 'asleep'}>
         <Room>
           <Monitor tab={tab} />
@@ -52,7 +72,7 @@ export default function PixelScene({ covers }: { covers: string[] }) {
           {cover && <g transform="translate(60 13)"><Cover id={cover} size={10} /></g>}
         </Room>
       </svg>
-      {live && <button type="button" className="sr-only-focusable pet" aria-label="Pet the cat" onClick={pet} />}
+      {live && <button type="button" className="pet" style={catBox} aria-label="Pet the cat" onClick={pet} />}
       <div className="crt" aria-hidden="true"><div className="grain" /></div>
       <p className="sr-only">{ALT[phase]}</p>
     </div>
