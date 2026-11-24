@@ -2,10 +2,30 @@
 import { existsSync } from 'node:fs';
 import Layout from '../components/Layout.astro';
 import Deck from '../components/Deck.astro';
+import Player from '../components/islands/Player';
 import { profile } from '../data/profile';
 
 const b = profile.basic_info;
 const cv = existsSync('public/cv.pdf') ? '/cv.pdf' : '/cv';
+const tabs = [
+  { id: 'now-playing', twin: 'Now Playing', plain: 'About' },
+  { id: 'playlist', twin: 'Playlist', plain: 'Experience' },
+  { id: 'singles', twin: 'Singles', plain: 'Projects' },
+  { id: 'liner-notes', twin: 'Liner Notes', plain: 'Education & Publication' },
+  { id: 'stickers', twin: 'Stickers', plain: 'Certificates' },
+] as const;
+// Labels only: no contact data reaches the island.
+const itemLabels = {
+  'now-playing': ['About'],
+  playlist: profile.work_experience.map((w) => `${w.title} — ${w.company}`),
+  singles: profile.projects.map((p) => p.name),
+  'liner-notes': [
+    ...profile.education.map((e) => e.degree),
+    ...profile.publications.map((p) => p.title),
+    ...profile.org_experience.map((o) => o.role),
+  ],
+  stickers: profile.certificates.map((c) => c.name),
+};
 const linkedin = /^[a-z]+:\/\//i.test(b.linkedin) ? b.linkedin : `https://${b.linkedin}`;
 ---
 
@@ -17,7 +37,7 @@ const linkedin = /^[a-z]+:\/\//i.test(b.linkedin) ? b.linkedin : `https://${b.li
     <div class="left">
       <h1>{b.name}</h1>
       <!-- Task 5 mounts Player here; Task 7 mounts PixelScene -->
-      <div id="player-slot"></div>
+      <Player client:load tabs={[...tabs]} itemLabels={itemLabels} />
       <nav aria-label="Actions">
         <a href={cv}>⬇ CV</a>
         <a href="/cv">≡ Plain CV</a>
