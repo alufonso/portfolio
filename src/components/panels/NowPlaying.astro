@@ -13,5 +13,5 @@ const url = (v: string) => (/^[a-z]+:\/\//i.test(v) ? v : `https://${v}`);
   <p class="meta">{b.location}</p>
   <p><a href={url(b.linkedin)}>LinkedIn</a> · <a href={url(b.github)}>GitHub</a></p>
   <h3>Top skills</h3>
-  <ul class="chips">{profile.skills.slice(0, 10).map((s) => <li>{s}</li>)}</ul>
+  <ul class="chips">{profile.skills.slice(0, 10).map((s) => <li class="px-corners">{s}</li>)}</ul>
 </section>

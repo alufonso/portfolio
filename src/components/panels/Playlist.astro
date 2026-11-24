@@ -5,12 +5,12 @@ import { profile } from '../../data/profile';
 <section role="tabpanel" data-panel="playlist" id="panel-playlist" aria-labelledby="tab-playlist">
   <h2>Playlist — Experience</h2>
   {profile.work_experience.map((w, i) => (
-    <article data-item={i}>
+    <article data-item={i} class="px-corners px-shadow">
       <h3>{w.title} — {w.company}</h3>
       <p class="meta">{w.duration} · {w.type}</p>
       <div class="detail">
         <ul>{w.bullets.map((x) => <li>{x}</li>)}</ul>
-        <ul class="chips">{w.tech.map((t) => <li>{t}</li>)}</ul>
+        <ul class="chips">{w.tech.map((t) => <li class="px-corners">{t}</li>)}</ul>
       </div>
     </article>
   ))}

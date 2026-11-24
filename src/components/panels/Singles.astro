@@ -6,7 +6,7 @@ import { Cover } from '../../art/covers';
 <section role="tabpanel" data-panel="singles" id="panel-singles" aria-labelledby="tab-singles">
   <h2>Singles — Projects</h2>
   {profile.projects.map((p, i) => (
-    <article data-item={i}>
+    <article data-item={i} class="px-corners px-shadow">
       <div class="cover"><Cover id={p.cover} size={64} /></div>
       <h3><a href={`/projects/${p.slug}`}>{p.name}</a></h3>
       <p class="meta">{p.technologies.join(' · ')}</p>

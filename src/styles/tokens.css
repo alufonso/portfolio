@@ -21,3 +21,36 @@ body {
 }
 
 :focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+
+/* Stepped pixel corners. --s = step (match the border width), --d = hard shadow offset (.px-shadow only).
+   The 2x2 --px-edge squares redraw the border's inner corner pixel so the outline stays closed. */
+.px-corners {
+  --s: 2px; --c: calc(var(--s) * 2); --px-edge: var(--ink);
+  clip-path: polygon(0 var(--c), var(--s) var(--c), var(--s) var(--s), var(--c) var(--s), var(--c) 0,
+    calc(100% - var(--c)) 0, calc(100% - var(--c)) var(--s), calc(100% - var(--s)) var(--s), calc(100% - var(--s)) var(--c), 100% var(--c),
+    100% calc(100% - var(--c)), calc(100% - var(--s)) calc(100% - var(--c)), calc(100% - var(--s)) calc(100% - var(--s)), calc(100% - var(--c)) calc(100% - var(--s)), calc(100% - var(--c)) 100%,
+    var(--c) 100%, var(--c) calc(100% - var(--s)), var(--s) calc(100% - var(--s)), var(--s) calc(100% - var(--c)), 0 calc(100% - var(--c)));
+  background-image: linear-gradient(var(--px-edge) 0 0), linear-gradient(var(--px-edge) 0 0), linear-gradient(var(--px-edge) 0 0), linear-gradient(var(--px-edge) 0 0);
+  background-size: var(--s) var(--s); background-repeat: no-repeat; background-origin: border-box;
+  background-position: var(--s) var(--s), calc(100% - var(--s)) var(--s), var(--s) calc(100% - var(--s)), calc(100% - var(--s)) calc(100% - var(--s));
+}
+/* Same, but the polygon also keeps a stepped box-shadow of --d (needs --d >= --s). The card's own
+   bottom-right corner stays square: the shadow sits behind it. */
+.px-corners.px-shadow {
+  --d: 3px; --e: calc(100% + var(--d));
+  clip-path: polygon(0 var(--c), var(--s) var(--c), var(--s) var(--s), var(--c) var(--s), var(--c) 0,
+    calc(100% - var(--c)) 0, calc(100% - var(--c)) var(--s), calc(100% - var(--s)) var(--s), calc(100% - var(--s)) var(--c), 100% var(--c),
+    100% calc(var(--d) + var(--s)), calc(var(--e) - var(--s)) calc(var(--d) + var(--s)), calc(var(--e) - var(--s)) calc(var(--d) + var(--c)), var(--e) calc(var(--d) + var(--c)),
+    var(--e) calc(var(--e) - var(--c)), calc(var(--e) - var(--s)) calc(var(--e) - var(--c)), calc(var(--e) - var(--s)) calc(var(--e) - var(--s)), calc(var(--e) - var(--c)) calc(var(--e) - var(--s)), calc(var(--e) - var(--c)) var(--e),
+    calc(var(--d) + var(--c)) var(--e), calc(var(--d) + var(--c)) calc(var(--e) - var(--s)), calc(var(--d) + var(--s)) calc(var(--e) - var(--s)), calc(var(--d) + var(--s)) 100%,
+    var(--c) 100%, var(--c) calc(100% - var(--s)), var(--s) calc(100% - var(--s)), var(--s) calc(100% - var(--c)), 0 calc(100% - var(--c)));
+  background-image: linear-gradient(var(--px-edge) 0 0), linear-gradient(var(--px-edge) 0 0), linear-gradient(var(--px-edge) 0 0);
+}
+/* Top corners only (tabs). */
+.px-corners.px-top {
+  clip-path: polygon(0 var(--c), var(--s) var(--c), var(--s) var(--s), var(--c) var(--s), var(--c) 0,
+    calc(100% - var(--c)) 0, calc(100% - var(--c)) var(--s), calc(100% - var(--s)) var(--s), calc(100% - var(--s)) var(--c), 100% var(--c), 100% 100%, 0 100%);
+  background-image: linear-gradient(var(--px-edge) 0 0), linear-gradient(var(--px-edge) 0 0);
+}
+/* clip-path would also clip the focus ring. */
+.px-corners:focus-visible { clip-path: none; }

@@ -10,7 +10,7 @@ const items = [
 <section role="tabpanel" data-panel="liner-notes" id="panel-liner-notes" aria-labelledby="tab-liner-notes">
   <h2>Liner Notes — Education & Publication</h2>
   {items.map((x, i) => (
-    <article data-item={i}>
+    <article data-item={i} class="px-corners px-shadow">
       <h3>{x.h}</h3>
       <p class="meta">{x.sub} · {x.d}</p>
       <div class="detail">

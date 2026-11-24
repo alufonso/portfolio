@@ -1,13 +1,15 @@
 ---
 import { profile } from '../../data/profile';
 import { Badge } from '../../art/badges';
+// Deterministic "random" tilt per index so SSR output is stable; never 0.
+const TILT = [-1.5, 1, -0.5, 2, -1, 1.5, -2, 0.5];
 ---
 
 <section role="tabpanel" data-panel="stickers" id="panel-stickers" aria-labelledby="tab-stickers">
   <h2>Stickers — Certificates</h2>
   {profile.certificates.map((c, i) => (
-    <article data-item={i}>
-      <div class="cover"><Badge id={c.badge} size={64} /></div>
+    <article data-item={i} class="px-corners px-shadow">
+      <div class="cover" style={`--tilt: ${TILT[i % TILT.length]}deg`}><Badge id={c.badge} size={64} /></div>
       <h3>{c.name}</h3>
       <p class="meta">{c.issuer} · {c.date}</p>
       {c.link && <div class="detail"><p><a href={c.link}>View credential</a></p></div>}

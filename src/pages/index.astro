@@ -43,10 +43,10 @@ const linkedin = /^[a-z]+:\/\//i.test(b.linkedin) ? b.linkedin : `https://${b.li
       <PixelScene client:load covers={profile.projects.map((p) => p.cover)} />
       <Player client:load tabs={[...tabs]} itemLabels={itemLabels} />
       <nav aria-label="Actions">
-        <a href={cv} download={hasPdf ? true : undefined}>⬇ CV</a>
-        <a href="/cv">≡ Plain CV</a>
-        <a href={`mailto:${b.email}`}>✉ Contact</a>
-        <a href={linkedin}>LinkedIn</a>
+        <a class="px-corners px-shadow" href={cv} download={hasPdf ? true : undefined}>⬇ CV</a>
+        <a class="px-corners" href="/cv">≡ Plain CV</a>
+        <a class="px-corners" href={`mailto:${b.email}`}>✉ Contact</a>
+        <a class="px-corners" href={linkedin}>LinkedIn</a>
       </nav>
     </div>
     <Deck />
@@ -54,6 +54,14 @@ const linkedin = /^[a-z]+:\/\//i.test(b.linkedin) ? b.linkedin : `https://${b.li
 </Layout>
 
 <style>
+  /* Player page only (/cv stays plain): faint paper dither and an original pixel cursor. */
+  @media screen {
+    :global(body) {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' shape-rendering='crispEdges'%3E%3Cpath fill='%23ece4d8' d='M0 0h1v1H0zM2 2h1v1H2z'/%3E%3C/svg%3E");
+      background-size: 8px;
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='32' viewBox='0 0 10 16' shape-rendering='crispEdges'%3E%3Cpath fill='%232b2520' d='M0 0h1v1h-1zM0 1h2v1h-2zM0 2h1v1h-1zM2 2h1v1h-1zM0 3h1v1h-1zM3 3h1v1h-1zM0 4h1v1h-1zM4 4h1v1h-1zM0 5h1v1h-1zM5 5h1v1h-1zM0 6h1v1h-1zM6 6h1v1h-1zM0 7h1v1h-1zM7 7h1v1h-1zM0 8h1v1h-1zM8 8h1v1h-1zM0 9h1v1h-1zM6 9h4v1h-4zM0 10h1v1h-1zM3 10h1v1h-1zM6 10h1v1h-1zM0 11h1v1h-1zM2 11h1v1h-1zM4 11h1v1h-1zM7 11h1v1h-1zM0 12h2v1h-2zM4 12h1v1h-1zM7 12h1v1h-1zM0 13h1v1h-1zM5 13h1v1h-1zM8 13h1v1h-1zM5 14h1v1h-1zM8 14h1v1h-1zM6 15h2v1h-2z'/%3E%3Cpath fill='%23f6f1e9' d='M1 2h1v1h-1zM1 3h2v1h-2zM1 4h3v1h-3zM1 5h4v1h-4zM1 6h5v1h-5zM1 7h6v1h-6zM1 8h7v1h-7zM1 9h5v1h-5zM1 10h2v1h-2zM4 10h2v1h-2zM1 11h1v1h-1zM5 11h2v1h-2zM5 12h2v1h-2zM6 13h2v1h-2zM6 14h2v1h-2z'/%3E%3C/svg%3E") 0 0, auto;
+    }
+  }
   .shell {
     display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.25rem;
     padding: 1rem 1rem 0; max-width: 72rem; margin: 0 auto;
@@ -68,10 +76,10 @@ const linkedin = /^[a-z]+:\/\//i.test(b.linkedin) ? b.linkedin : `https://${b.li
   nav a {
     display: flex; align-items: center; justify-content: center;
     font: 600 .9rem/1.2 var(--font-sans); color: var(--ink); text-decoration: none; text-align: center;
-    background: var(--paper); border: 2px solid var(--ink); padding: .45rem .75rem;
+    background-color: var(--paper); border: 2px solid var(--ink); padding: .45rem .75rem;
   }
-  nav a:hover { background: #fff; }
-  nav a:first-child { background: var(--accent-ink); color: var(--paper); box-shadow: 3px 3px 0 var(--ink); }
+  nav a:hover { background-color: #fff; }
+  nav a:first-child { background-color: var(--accent-ink); color: var(--paper); box-shadow: 3px 3px 0 var(--ink); }
 
   @media (max-width: 899.98px) {
     /* Children join the shell grid so the action bar can stick across the whole page. */
@@ -83,7 +91,6 @@ const linkedin = /^[a-z]+:\/\//i.test(b.linkedin) ? b.linkedin : `https://${b.li
       border-top: 2px solid var(--ink);
     }
     nav a { flex: 1 1 0; min-width: 0; font-size: .8rem; padding: .45rem .2rem; overflow-wrap: anywhere; }
-    nav a:first-child { box-shadow: none; }
   }
   @media (min-width: 900px) {
     .shell { grid-template-columns: 42% minmax(0, 1fr); gap: 2.5rem; padding: 2rem 1.5rem 3rem; }

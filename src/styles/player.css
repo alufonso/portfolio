@@ -1,5 +1,5 @@
 .player {
-  background: #fffaf2; border: 2px solid var(--ink); box-shadow: 3px 3px 0 var(--accent);
+  background-color: #fffaf2; border: 2px solid var(--ink); box-shadow: 3px 3px 0 var(--accent);
   padding: 0 .9rem .9rem; display: grid; gap: .7rem; min-width: 0;
 }
 
@@ -10,12 +10,11 @@
 }
 .player [role=tab] {
   flex: none; font: 400 .9rem var(--font-pixel); color: var(--ink); cursor: pointer;
-  background: var(--line); border: 2px solid var(--ink); border-bottom: 0;
-  border-radius: 4px 4px 0 0; padding: .3rem .6rem .2rem; margin-top: 5px; white-space: nowrap;
+  background-color: var(--line); border: 2px solid var(--ink); border-bottom: 0; padding: .3rem .6rem .2rem; margin-top: 5px; white-space: nowrap;
 }
-.player [role=tab]:hover { background: #fff; }
+.player [role=tab]:hover { background-color: #fff; }
 .player [role=tab][aria-selected=true] {
-  background: var(--accent-ink); color: var(--paper); font-weight: 700;
+  background-color: var(--accent-ink); color: var(--paper); font-weight: 700;
   margin-top: 0; padding-top: .55rem; text-decoration: underline; text-underline-offset: 3px;
 }
 /* Inset so the tablist's overflow does not clip the ring. */
@@ -24,13 +23,16 @@
 .player .transport { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; }
 .player .transport button {
   width: 2.5rem; height: 2.5rem; display: grid; place-items: center; cursor: pointer;
-  font: 1rem/1 var(--font-sans); color: var(--ink); background: var(--paper);
+  font: 1rem/1 var(--font-sans); color: var(--ink); background-color: var(--paper);
   border: 2px solid var(--ink); box-shadow: 3px 3px 0 var(--accent); padding: 0;
 }
-.player .transport button:hover { background: #fff; }
+.player .transport button:hover { background-color: #fff; }
 .player .transport button:active:not(:disabled) { transform: translate(3px, 3px); box-shadow: none; }
-.player .transport button[aria-label$=music] { background: var(--accent-ink); color: var(--paper); }
+.player .transport button[aria-label$=music] { background-color: var(--accent-ink); color: var(--paper); }
 .player .transport button:disabled { opacity: .5; cursor: not-allowed; }
+.player .transport .crt-toggle { width: auto; padding: 0 .6rem; margin-left: auto; font: .85rem var(--font-pixel); }
+/* Pressed = sunk into its shadow and filled (not colour alone). */
+.player .transport .crt-toggle[aria-pressed=true] { transform: translate(3px, 3px); box-shadow: none; background-color: var(--night); color: var(--lamp); }
 .player .transport [role=status] { font: .8rem var(--font-pixel); color: var(--muted); }
 
 .player input[type=range] {

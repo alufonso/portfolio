@@ -8,7 +8,19 @@ export const C = {
   wood: '#6e4a36', woodDark: '#4a3428', woodLight: '#8a5c40', floor: '#3b2c26',
   accentDark: '#8a3d1f', accentDeep: '#6a2f18', accentLight: '#cf6a3c',
   bezel: '#1b1820', screen: '#24304a', gear: '#3a3040', gearLight: '#4d4258',
+  // time-of-day shades (see PHASES)
+  wallMorning: '#4b4560', glassMorning: '#9aa6b8', horizonMorning: '#b9c0c9', cityMorning: '#6d6f86',
+  wallDusk: '#3d2a40', glassDusk: '#5e3f63', horizonDusk: '#d9824a', cityDusk: '#3a2638',
 };
+
+// Phase palette as CSS custom properties keyed on the svg's data-phase; night = the original look.
+const PHASES = {
+  night: { wall: C.night, glass: C.glass, horizon: C.glass, city: C.city, lights: 1, moon: 1, lamp: 1 },
+  dusk: { wall: C.wallDusk, glass: C.glassDusk, horizon: C.horizonDusk, city: C.cityDusk, lights: 0.8, moon: 0.4, lamp: 0.8 },
+  morning: { wall: C.wallMorning, glass: C.glassMorning, horizon: C.horizonMorning, city: C.cityMorning, lights: 0, moon: 0, lamp: 0.35 },
+};
+const phaseCss = Object.entries(PHASES).map(([k, v]) =>
+  `svg[data-phase=${k}]{${Object.entries(v).map(([n, x]) => `--${n}:${x}`).join(';')}}`).join('');
 
 export type Px = [x: number, y: number, w: number, h: number, fill: string, opacity?: number];
 
@@ -22,7 +34,6 @@ const DROPS: [number, number][] = [[9, 1], [13, 6], [17, 3], [23, 8], [26, 2], [
 const rain: Px[] = [-10, 0, 10, 20].flatMap((dy) => DROPS.map(([x, y]): Px => [x, y + dy, 1, 3, C.rain, 0.55]));
 
 const wall: Px[] = [
-  [0, 0, 96, 54, C.night],
   [0, 46, 96, 1, C.nightLight],
   [0, 47, 96, 7, C.floor],
   [0, 50, 40, 1, C.woodDark], [44, 52, 52, 1, C.woodDark],
@@ -37,11 +48,12 @@ const wall: Px[] = [
 const windowBack: Px[] = [
   [1, 3, 38, 1, C.muted], // curtain rod
   [5, 5, 30, 24, C.woodDark],
-  [7, 7, 26, 20, C.glass],
-  // moon
-  [28, 9, 2, 1, C.line], [27, 10, 4, 2, C.line], [28, 12, 2, 1, C.line],
-  // distant city
-  [7, 22, 5, 5, C.city], [12, 24, 4, 3, C.city], [16, 21, 4, 6, C.city], [21, 23, 6, 4, C.city], [27, 20, 6, 7, C.city],
+];
+const glass: Px[] = [[7, 7, 26, 20, C.glass]];
+const horizon: Px[] = [[7, 19, 26, 8, C.glass]];
+const moon: Px[] = [[28, 9, 2, 1, C.line], [27, 10, 4, 2, C.line], [28, 12, 2, 1, C.line]];
+const city: Px[] = [[7, 22, 5, 5, C.city], [12, 24, 4, 3, C.city], [16, 21, 4, 6, C.city], [21, 23, 6, 4, C.city], [27, 20, 6, 7, C.city]];
+const cityLights: Px[] = [
   [9, 23, 1, 1, C.lamp, 0.8], [17, 22, 1, 1, C.lamp, 0.8], [18, 24, 1, 1, C.lamp, 0.6], [23, 24, 1, 1, C.lamp, 0.7], [29, 22, 1, 1, C.lamp, 0.8], [31, 24, 1, 1, C.lamp, 0.6],
 ];
 
@@ -108,8 +120,15 @@ const figure: Px[] = [
 export default function Room({ children }: { children: ReactNode }) {
   return (
     <>
+      <style>{phaseCss}</style>
+      <rect className="wall" width="96" height="54" fill={C.night} />
       {px(wall)}
       {px(windowBack)}
+      <g className="glass">{px(glass)}</g>
+      <g className="horizon">{px(horizon)}</g>
+      <g className="moon">{px(moon)}</g>
+      <g className="city">{px(city)}</g>
+      <g className="city-lights">{px(cityLights)}</g>
       <clipPath id="glass"><rect x="7" y="7" width="26" height="20" /></clipPath>
       <g clipPath="url(#glass)"><g className="rain">{px(rain)}</g></g>
       {px(windowFront)}
@@ -119,7 +138,7 @@ export default function Room({ children }: { children: ReactNode }) {
       {children}
       <rect className="screen-flicker" x="50" y="12" width="30" height="18" fill={C.paper} opacity="0.04" />
       {px(figure)}
-      <g className="lamp">{px(lampGlow)}</g>
+      <g className="lamp-phase"><g className="lamp">{px(lampGlow)}</g></g>
       {px(lampBody)}
     </>
   );

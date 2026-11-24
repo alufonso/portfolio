@@ -9,6 +9,7 @@ type Props = {
   itemLabels: Record<TabId, string[]>;
 };
 
+const CRT_KEY = 'lofi-crt';
 const same = (a: DeckState, b: DeckState) => a.tab === b.tab && a.item === b.item;
 
 export default function Player({ tabs, itemLabels }: Props) {
@@ -21,6 +22,7 @@ export default function Player({ tabs, itemLabels }: Props) {
   const [on, setOn] = useState(false);
   const [unavailable, setUnavailable] = useState(false);
   const [vol, setVol] = useState(0.5);
+  const [crt, setCrt] = useState(false);
   const scrollNext = useRef(false); // set by user-driven changes only, so mount/deep-link never scrolls
 
   // Single entry point for user-driven changes: update state, write hash, notify other islands.
@@ -57,6 +59,7 @@ export default function Player({ tabs, itemLabels }: Props) {
       if (document.visibilityState === 'hidden') { engine.current?.stop(); setOn(false); }
     };
     fromHash();
+    try { setCrt(localStorage.getItem(CRT_KEY) === '1'); } catch { /* storage unavailable: CRT stays off */ }
     const v = readVolume();
     setVol(v);
     engine.current = createLofiEngine(); // no AudioContext until start()
@@ -71,6 +74,14 @@ export default function Player({ tabs, itemLabels }: Props) {
       document.removeEventListener('keydown', onKey);
     };
   }, [go]);
+
+  // The scene island draws the overlay; it keys on html[data-crt].
+  useEffect(() => { document.documentElement.toggleAttribute('data-crt', crt); }, [crt]);
+
+  const toggleCrt = () => {
+    setCrt(!crt);
+    try { localStorage.setItem(CRT_KEY, crt ? '0' : '1'); } catch { /* not remembered */ }
+  };
 
   // Reflect state onto the static panels.
   useEffect(() => {
@@ -113,12 +124,13 @@ export default function Player({ tabs, itemLabels }: Props) {
   const label = itemLabels[s.tab][s.item] ?? '';
 
   return (
-    <div className="player">
+    <div className="player px-corners px-shadow">
       <div role="tablist" aria-label="Sections" onKeyDown={onTabKey} className="tabs">
         {tabs.map((t) => (
           <button
             key={t.id}
             role="tab"
+            className="px-corners px-top"
             type="button"
             id={`tab-${t.id}`}
             aria-controls={`panel-${t.id}`}
@@ -132,14 +144,15 @@ export default function Player({ tabs, itemLabels }: Props) {
         ))}
       </div>
       <div className="transport">
-        <button type="button" aria-label="Previous item" onClick={() => go(stepItem(s, -1, counts))}>⏮</button>
-        <button type="button" aria-label={on ? 'Pause music' : 'Play music'} disabled={unavailable} onClick={toggle}>{on ? '❚❚' : '▶'}</button>
-        <button type="button" aria-label="Next item" onClick={() => go(stepItem(s, 1, counts))}>⏭</button>
+        <button type="button" className="px-corners px-shadow" aria-label="Previous item" onClick={() => go(stepItem(s, -1, counts))}>⏮</button>
+        <button type="button" className="px-corners px-shadow" aria-label={on ? 'Pause music' : 'Play music'} disabled={unavailable} onClick={toggle}>{on ? '❚❚' : '▶'}</button>
+        <button type="button" className="px-corners px-shadow" aria-label="Next item" onClick={() => go(stepItem(s, 1, counts))}>⏭</button>
         <input
           type="range" aria-label="Volume" min={0} max={1} step={0.01} value={vol}
           onChange={(e) => { const v = Number(e.target.value); setVol(v); writeVolume(v); engine.current?.setVolume(v); }}
         />
         {unavailable && <span role="status">Audio unavailable</span>}
+        <button type="button" className="crt-toggle px-corners px-shadow" aria-pressed={crt} onClick={toggleCrt}>CRT effect</button>
       </div>
       <p data-testid="track-label" className="track">{`${twin} · ${nn} ${label}`}</p>
       <progress value={s.item + 1} max={counts[s.tab]} aria-label="Position in list" />

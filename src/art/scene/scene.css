@@ -1,9 +1,32 @@
-.scene { margin-bottom: 1rem; }
+.scene { margin-bottom: 1rem; position: relative; }
 .scene svg { display: block; width: 100%; height: auto; image-rendering: pixelated; box-shadow: 4px 4px 0 var(--accent); }
 .scene .sr-only {
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
   overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
 }
+
+/* Time of day: values come from room.tsx PHASES via --vars on svg[data-phase]. */
+.scene .wall { fill: var(--wall); }
+.scene .glass rect { fill: var(--glass); }
+.scene .horizon rect { fill: var(--horizon); }
+.scene .city rect { fill: var(--city); }
+.scene .city-lights { opacity: var(--lights); }
+.scene .moon { opacity: var(--moon); }
+.scene .lamp-phase { opacity: var(--lamp); }
+.scene svg:not([data-phase=night]) .rain { display: none; }
+
+/* CRT (Player toggles html[data-crt]): scanlines + grain over the scene only. */
+.crt {
+  display: none; position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+  background: repeating-linear-gradient(#0000 0 2px, #1a162638 2px 3px);
+}
+html[data-crt] .crt { display: block; }
+.crt .grain {
+  position: absolute; inset: -64px; opacity: .14; image-rendering: pixelated;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='64' height='64' filter='url(%23n)'/%3E%3C/svg%3E") 0 0 / 128px;
+  animation: grain .5s steps(4) infinite;
+}
+@keyframes grain { 0% { transform: translate(0, 0); } 25% { transform: translate(-18px, 10px); } 50% { transform: translate(12px, -22px); } 75% { transform: translate(-26px, -8px); } }
 
 /* Transform/opacity only, stepped so motion reads as pixel frames. */
 .rain { animation: rain 0.6s steps(5) infinite; }
@@ -17,5 +40,5 @@
 @keyframes flicker { from { opacity: 0.03; } to { opacity: 0.07; } }
 
 @media (prefers-reduced-motion: reduce) {
-  .rain, .steam, .lamp, .screen-flicker { animation: none; }
+  .rain, .steam, .lamp, .screen-flicker, .crt .grain { animation: none; }
 }
