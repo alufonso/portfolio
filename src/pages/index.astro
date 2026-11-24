@@ -50,6 +50,26 @@ const linkedin = /^[a-z]+:\/\//i.test(b.linkedin) ? b.linkedin : `https://${b.li
       </nav>
     </div>
     <Deck />
+    {/* Pre-hydration: pick the active panel/item before first paint so the stacked no-JS layout
+        never flashes. Mirrors parseHash (src/lib/deck.ts); the Player re-applies the same state on mount. */}
+    <script is:inline>
+      (function () {
+        var d = document.getElementById('deck');
+        if (!d) return;
+        var tabs = ['now-playing', 'playlist', 'singles', 'liner-notes', 'stickers'];
+        var h = location.hash.replace(/^#/, '').split('/');
+        var t = tabs.indexOf(h[0]) >= 0 ? h[0] : 'now-playing';
+        var p = d.querySelector('[data-panel="' + t + '"]');
+        if (!p) return;
+        var items = p.querySelectorAll('[data-item]');
+        var n = /^\d+$/.test(h[1] || '') ? Math.min(Number(h[1]), Math.max(items.length - 1, 0)) : 0;
+        d.setAttribute('data-js', '');
+        d.dataset.activeTab = t;
+        d.dataset.activeItem = String(n);
+        p.classList.add('is-active');
+        if (items[n]) items[n].setAttribute('aria-current', 'true');
+      })();
+    </script>
   </main>
 </Layout>
 
