@@ -14,8 +14,14 @@ test('every case study returns 200', async ({ page }) => {
 
 test('no result section when result missing', async ({ page }) => {
   const p = projects.find((x) => !(x.case_study as any).result)!;
-  await page.goto(`/projects/${p.slug}`);
+  const res = await page.goto(`/projects/${p.slug}`);
+  expect(res?.status()).toBe(200);
+  await expect(page.locator('h1')).toHaveText(p.name);
   await expect(page.getByRole('heading', { name: 'Result' })).toHaveCount(0);
+
+  const withResult = projects.find((x) => (x.case_study as any).result)!;
+  await page.goto(`/projects/${withResult.slug}`);
+  await expect(page.getByRole('heading', { name: 'Result' })).toHaveCount(1);
 });
 
 test('unknown route is themed 404', async ({ page }) => {
