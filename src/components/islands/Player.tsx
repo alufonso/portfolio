@@ -93,7 +93,7 @@ export default function Player({ tabs, itemLabels }: Props) {
     const e = engine.current;
     if (!e) return;
     if (e.playing) { e.stop(); setOn(false); return; }
-    try { await e.start(); setOn(true); } catch { setUnavailable(true); }
+    try { await e.start(); setOn(e.playing); } catch { setUnavailable(true); }
   };
 
   const twin = tabs.find((t) => t.id === s.tab)?.twin ?? '';

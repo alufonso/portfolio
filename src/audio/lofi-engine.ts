@@ -44,23 +44,34 @@ export function createLofiEngine(): LofiEngine {
 
   const level = (v: number) => v * 0.4; // keep it soft: peak master gain 0.4
 
+  let gen = 0; // bumped by stop(): invalidates a start() still awaiting resume()
+  let pending: Promise<void> | null = null;
+  let pendingCtx: AudioContext | null = null;
+
   function start(): Promise<void> {
     if (playing) return Promise.resolve();
+    if (pending) return pending;
     const w = window as any;
     const Ctor: typeof AudioContext | undefined = w.AudioContext ?? w.webkitAudioContext;
     if (!Ctor) return Promise.reject(new Error('Web Audio unavailable'));
-    const c = new Ctor();
-    return c.resume().then(
+    const c = (pendingCtx = new Ctor());
+    const mine = gen;
+    const done = () => { pending = pendingCtx = null; };
+    pending = c.resume().then(
       () => {
+        if (gen !== mine) { c.close().catch(() => {}); return; }
+        done();
         ctx = c;
         playing = true;
         build(c);
       },
       (e) => {
+        done();
         c.close().catch(() => {});
         throw e;
       },
     );
+    return pending;
   }
 
   function build(c: AudioContext) {
@@ -148,6 +159,7 @@ export function createLofiEngine(): LofiEngine {
   }
 
   function stop() {
+    if (pending) { gen++; pendingCtx?.close().catch(() => {}); pending = pendingCtx = null; }
     if (!playing || !ctx || !master) return;
     playing = false;
     clearInterval(timer);

@@ -49,3 +49,19 @@ test('volume slider arrows do not move items', async ({ page }) => {
   await page.keyboard.press('ArrowLeft');
   await expect(page.locator('[data-panel=playlist] [data-item="1"]')).toHaveAttribute('aria-current', 'true');
 });
+
+test('hidden while resume is pending never starts music', async ({ page }) => {
+  await page.addInitScript(() => {
+    const r = AudioContext.prototype.resume;
+    AudioContext.prototype.resume = function () { return new Promise((ok) => setTimeout(ok, 300)).then(() => r.call(this)); };
+  });
+  await page.goto('/');
+  await page.getByRole('button', { name: 'Play music' }).click();
+  await page.evaluate(() => {
+    Object.defineProperty(document, 'visibilityState', { configurable: true, get: () => 'hidden' });
+    document.dispatchEvent(new Event('visibilitychange'));
+  });
+  await page.waitForTimeout(700);
+  await expect(page.getByRole('button', { name: 'Play music' })).toBeVisible();
+  expect(await page.evaluate(() => (window as any).__ac)).toBeLessThanOrEqual(1);
+});
