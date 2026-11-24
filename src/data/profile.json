@@ -188,7 +188,7 @@
       "case_study": {
         "summary": "AI assistant app where I built features across the mobile app, web and backend.",
         "role": "Full-stack & AI Engineer (Contract)",
-        "problem": "The assistant needed to turn imported WhatsApp chats into saved moments and reminders, and the product needed monetisation, growth tracking and analytics around it.",
+        "problem": "Build AI features on the assistant, such as turning imported WhatsApp chats into saved moments and reminders, across the mobile app, website, admin dashboard and backend.",
         "built": [
           "Built AI features on the assistant's LangGraph runtime, including turning imported WhatsApp chats into saved moments and reminders, with better accuracy, reliability and privacy.",
           "Built features end to end across the mobile app (Flutter), website and admin dashboard (Next.js), and backend services (TypeScript on Google Cloud Run, Supabase/PostgreSQL).",
@@ -207,6 +207,8 @@
       "technologies": [
         "React Native",
         "Expo",
+        "D1",
+        "Cloudflare Pages",
         "Cloudflare Workers",
         "Node.js",
         "Google Cloud Run",
@@ -217,7 +219,7 @@
       "case_study": {
         "summary": "Product with AI assistants, built end to end across mobile, web, internal tools and backend.",
         "role": "Full-stack & AI Engineer (Contract)",
-        "problem": "The AI assistants needed to behave well in conversation, and the team needed visibility into AI cost, quality and usage plus secure sign-in.",
+        "problem": "Build features across the mobile app, website, internal tools and backend, shape how the AI assistants behave in conversation, and monitor AI cost, quality and usage.",
         "built": [
           "Built features end to end across the mobile app (React Native/Expo), website (Cloudflare Pages + Workers, D1), internal tools (Node.js on Google Cloud Run) and backend (TypeScript, Hono, PostgreSQL).",
           "Shaped how the AI assistants behave in conversation, including personalisation and onboarding.",
@@ -245,7 +247,7 @@
       ],
       "case_study": {
         "summary": "AI tool that analyses a CV against a job description and generates a tailored, ATS-friendly CV.",
-        "role": "Solo developer",
+        "role": "Developer",
         "problem": "Tailoring a CV to every job posting by hand is slow, and relevant past experience is easy to overlook.",
         "built": [
           "Master Profile extraction: upload a CV (PDF/DOCX) and save a structured profile locally.",
@@ -275,7 +277,7 @@
       "case_study": {
         "summary": "Undergraduate thesis: emotion classification of Indonesian song lyrics with a fine-tuned IndoBERT.",
         "role": "Researcher and author",
-        "problem": "Classifying emotion in Indonesian song lyrics, a low-resource setting for NLP.",
+        "problem": "Classifying emotion in Indonesian song lyrics into four categories: joy, sadness, fear and anger.",
         "built": [
           "Compiled a dataset of 1,025 labeled lyric entries covering four emotions: joy, sadness, fear and anger.",
           "Fine-tuned and evaluated IndoBERT-base-p2 for emotion classification."
@@ -298,7 +300,7 @@
       ],
       "case_study": {
         "summary": "Real-time hand-gesture rock-paper-scissors game in the browser.",
-        "role": "Solo developer",
+        "role": "Developer",
         "problem": "Make a classic game playable with just a webcam, alone or against a friend.",
         "built": [
           "Built a web-based rock-paper-scissors game with real-time hand gesture recognition using computer vision (MediaPipe Hands), supporting both live webcam input and image upload.",

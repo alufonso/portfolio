@@ -10,6 +10,7 @@ const toBullets = ({ description, ...rest }) => ({
 });
 const dropEmpty = (o) => Object.fromEntries(Object.entries(o).filter(([, v]) => v !== ''));
 
+// phone is dropped deliberately (privacy): it must never reach the portfolio repo
 const { phone, ...basic } = m.basic_info;
 const work = m.work_experience.map((w) => {
   const mt = w.title.match(/^(.*?)\s*\(([^)]+)\)\s*$/);
