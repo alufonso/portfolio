@@ -58,9 +58,10 @@ export default function Player({ tabs, itemLabels }: Props) {
     deck.querySelectorAll<HTMLElement>('[data-panel]').forEach((p) => {
       const on = p.dataset.panel === s.tab;
       p.classList.toggle('is-active', on);
-      p.querySelectorAll<HTMLElement>('[data-item]').forEach((a) =>
-        a.setAttribute('aria-expanded', String(on && Number(a.dataset.item) === s.item)),
-      );
+      p.querySelectorAll<HTMLElement>('[data-item]').forEach((a) => {
+        if (on && Number(a.dataset.item) === s.item) a.setAttribute('aria-current', 'true');
+        else a.removeAttribute('aria-current');
+      });
     });
   }, [s]);
 

@@ -11,8 +11,8 @@ test('clicking a tab shows only that panel and sets hash', async ({ page }) => {
 test('deep link selects item', async ({ page }) => {
   await page.goto('/#playlist/2');
   await expect(page.getByRole('tab', { name: /Playlist/ })).toHaveAttribute('aria-selected', 'true');
-  await expect(page.locator('[data-panel=playlist] [data-item="2"]')).toHaveAttribute('aria-expanded', 'true');
-  await expect(page.locator('[data-panel=playlist] [data-item="1"]')).toHaveAttribute('aria-expanded', 'false');
+  await expect(page.locator('[data-panel=playlist] [data-item="2"]')).toHaveAttribute('aria-current', 'true');
+  await expect(page.locator('[data-panel=playlist] [data-item="1"]')).not.toHaveAttribute('aria-current', /.*/);
 });
 
 test('next button and arrow keys move items', async ({ page }) => {
@@ -54,5 +54,5 @@ test('global keys ignore inputs and modifiers; external hashchange applies', asy
   );
   expect(page.url()).toMatch(/#playlist$/);
   await page.evaluate(() => { location.hash = '#singles/1'; });
-  await expect(page.locator('[data-panel=singles] [data-item="1"]')).toHaveAttribute('aria-expanded', 'true');
+  await expect(page.locator('[data-panel=singles] [data-item="1"]')).toHaveAttribute('aria-current', 'true');
 });

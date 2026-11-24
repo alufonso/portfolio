@@ -24,7 +24,7 @@ import Stickers from './panels/Stickers.astro';
   #deck .chips li { font: 600 .75rem var(--font-sans); border: 1px solid var(--line); padding: .1rem .45rem; }
   #deck a { color: var(--accent); }
   #deck .cover { width: 4rem; height: 4rem; border: 2px solid var(--ink); background: var(--night); float: right; margin-left: 1rem; }
-  /* JS mode only: Player toggles .is-active and aria-expanded */
+  /* JS mode only: Player toggles .is-active and aria-current */
   #deck[data-js] [data-panel]:not(.is-active) { display: none; }
-  #deck[data-js] article:not([aria-expanded=true]) .detail { display: none; }
+  #deck[data-js] article:not([aria-current=true]) .detail { display: none; }
 </style>
