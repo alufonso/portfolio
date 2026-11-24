@@ -79,26 +79,29 @@ const steam: Px[] = [[41, 28, 1, 2, C.line, 0.6], [42, 26, 1, 2, C.line, 0.5], [
 // Extra puffs shown only while music plays.
 const steamMore: Px[] = [[43, 27, 1, 2, C.line, 0.5], [40, 25, 1, 2, C.line, 0.4], [43, 23, 1, 1, C.line, 0.3]];
 
-// Sleeping cat on the desk between mouse and lamp (x 75..84, y 32..35): 3x3 face on the left, body behind.
+// Sleeping cat on the desk, curled in front of the monitor's bottom bezel (x 72..87, y 30..35):
+// 5x5 head with ears on the left, striped body behind, pale paws and tail along the front.
+// It stays below the screen (y <= 29), right of the figure and clear of the mug.
 const cat: Px[] = [
-  [75, 32, 1, 1, C.catFur], [77, 32, 1, 1, C.catFur], // ears
-  [75, 33, 3, 2, C.catFur], [76, 34, 1, 1, C.accentLight], // face + nose
-  [78, 33, 1, 2, C.catShade], // neck shadow splits face from body
-  [79, 33, 6, 2, C.catFur], [81, 34, 1, 1, C.catShade], [83, 33, 1, 1, C.catShade], // body + stripes
-  [75, 35, 3, 1, C.catFur], [78, 35, 7, 1, C.catShade], // paws + tail along the front
+  [72, 30, 1, 1, C.catFur], [76, 30, 1, 1, C.catFur], // ear tips
+  [72, 31, 2, 1, C.catFur], [75, 31, 2, 1, C.catFur], [73, 31, 1, 1, C.catShade], [75, 31, 1, 1, C.catShade], // ears
+  [72, 32, 5, 3, C.catFur], [74, 34, 1, 1, C.accentLight], // face + nose
+  [77, 32, 1, 3, C.catShade], // neck shadow splits face from body
+  [78, 32, 9, 3, C.catFur], [80, 33, 1, 2, C.catShade], [83, 33, 1, 2, C.catShade], [86, 33, 1, 2, C.catShade], // body + stripes
+  [72, 35, 2, 1, C.line], [75, 35, 2, 1, C.line], // paws
+  [77, 35, 10, 1, C.catShade], [87, 34, 1, 2, C.catShade], // tail along the front, curling up at the end
 ];
 // Back hump: rises 1px on each breath.
-const catBack: Px[] = [[80, 32, 4, 1, C.catFur], [80, 33, 4, 1, C.catFur], [83, 33, 1, 1, C.catShade]];
-const catEyesShut: Px[] = [[75, 33, 1, 1, C.gear], [77, 33, 1, 1, C.gear]];
-const catEyesOpen: Px[] = [[75, 33, 1, 1, C.lamp], [77, 33, 1, 1, C.lamp]];
+const catBack: Px[] = [[79, 31, 7, 2, C.catFur], [80, 31, 1, 2, C.catShade], [83, 31, 1, 2, C.catShade]];
+const catEyesShut: Px[] = [[72, 33, 2, 1, C.gear], [75, 33, 2, 1, C.gear]];
+const catEyesOpen: Px[] = [[73, 32, 1, 2, C.lamp], [75, 32, 1, 2, C.lamp], [73, 33, 1, 1, C.ink], [75, 33, 1, 1, C.ink]];
 
 const monitorBody: Px[] = [
   [46, 8, 38, 26, '#3a4466', 0.25], // glow on the wall
   [48, 10, 34, 22, C.bezel],
   [50, 12, 30, 18, C.screen],
-  [78, 30, 1, 1, C.lamp],
+  [50, 30, 1, 1, C.lamp], // power LED (left, clear of the cat)
   [63, 32, 4, 3, C.bezel], [60, 35, 10, 1, C.bezel],
-  [73, 35, 2, 1, C.line], // mouse
 ];
 
 const lampBody: Px[] = [

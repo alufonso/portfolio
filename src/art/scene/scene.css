@@ -69,8 +69,8 @@ html[data-playing] .scene .viz, html[data-playing] .scene .steam-more { display:
 /* Pet button: an invisible hit area over the cat, outlined on keyboard focus. PixelScene sets the
    exact box from the cat's rendered rect; these viewBox percentages are only the first-paint fallback. */
 .scene .pet {
-  position: absolute; left: calc(74 / 96 * 100%); top: calc(30 / 54 * 100%);
-  width: calc(12 / 96 * 100%); height: calc(7 / 54 * 100%);
+  position: absolute; left: calc(71 / 96 * 100%); top: calc(28 / 54 * 100%);
+  width: calc(18 / 96 * 100%); height: calc(9 / 54 * 100%);
   padding: 0; border: 0; background: none; cursor: pointer;
 }
 .scene .pet:focus-visible { outline: 2px dashed var(--lamp); outline-offset: 1px; }
