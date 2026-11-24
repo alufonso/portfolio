@@ -1,0 +1,6 @@
+@media print {
+  [data-panel], svg[data-monitor], nav, .no-print { display: none !important; }
+  body { background: #fff; color: #000; }
+  a { color: #000; }
+  .cv a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.85em; }
+}

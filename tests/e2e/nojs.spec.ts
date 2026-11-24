@@ -34,6 +34,7 @@ test('action links work without JS', async ({ page }) => {
   const nav = page.locator('nav[aria-label="Actions"]');
   await expect(nav.locator('a[href="/cv"]').first()).toBeVisible();
   await expect(nav.locator('a[href^="mailto:"]')).toHaveCount(1);
+  await expect(nav.locator('a[href^="https://"]')).not.toHaveCount(0);
 });
 
 test('no phone number anywhere', async ({ page }) => {

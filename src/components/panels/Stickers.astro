@@ -10,9 +10,7 @@ import { Badge } from '../../art/badges';
       <div class="cover"><Badge id={c.badge} size={64} /></div>
       <h3>{c.name}</h3>
       <p class="meta">{c.issuer} · {c.date}</p>
-      <div class="detail">
-        {c.link && <p><a href={c.link}>View credential</a></p>}
-      </div>
+      {c.link && <div class="detail"><p><a href={c.link}>View credential</a></p></div>}
     </article>
   ))}
 </section>

@@ -1,0 +1,111 @@
+---
+import Layout from '../components/Layout.astro';
+import { profile } from '../data/profile';
+
+const b = profile.basic_info;
+const url = (v: string) => (/^[a-z]+:\/\//i.test(v) ? v : `https://${v}`);
+---
+
+<Layout title="Agustar Alfonso — CV" description={`${b.name}, ${b.headline}. Plain printable CV.`}>
+  <main class="cv">
+    <header>
+      <h1>{b.name}</h1>
+      <p class="headline">{b.headline}</p>
+      <p class="meta">
+        {b.location} · <a href={`mailto:${b.email}`}>{b.email}</a> ·
+        <a href={url(b.linkedin)}>LinkedIn</a> · <a href={url(b.github)}>GitHub</a>
+      </p>
+    </header>
+
+    <section>
+      <h2>Summary</h2>
+      {b.summary.split('\n').map((p) => <p>{p}</p>)}
+    </section>
+
+    <section id="skills">
+      <h2>Skills</h2>
+      <ul class="skills">{profile.skills.map((s) => <li>{s}</li>)}</ul>
+    </section>
+
+    <section>
+      <h2>Experience</h2>
+      {profile.work_experience.map((w) => (
+        <article>
+          <h3>{w.title}, {w.company}</h3>
+          <p class="meta">{w.duration} · {w.type}</p>
+          <ul>{w.bullets.map((x) => <li>{x}</li>)}</ul>
+          {w.tech.length > 0 && <p class="meta">Tech: {w.tech.join(', ')}</p>}
+        </article>
+      ))}
+    </section>
+
+    <section>
+      <h2>Projects</h2>
+      {profile.projects.map((p) => (
+        <article>
+          <h3>{p.name}</h3>
+          <p>{p.case_study.summary}</p>
+          <p class="meta">Tech: {p.technologies.join(', ')}</p>
+          <p><a href={`/projects/${p.slug}`}>Case study</a></p>
+        </article>
+      ))}
+    </section>
+
+    <section>
+      <h2>Education</h2>
+      {profile.education.map((e) => (
+        <article>
+          <h3>{e.degree}, {e.institution}</h3>
+          <p class="meta">{e.duration}</p>
+          <ul>{e.bullets.map((x) => <li>{x}</li>)}</ul>
+        </article>
+      ))}
+    </section>
+
+    <section>
+      <h2>Publication</h2>
+      {profile.publications.map((p) => (
+        <article>
+          <h3>{p.link ? <a href={p.link}>{p.title}</a> : p.title}</h3>
+          <p class="meta">{p.publisher} · {p.date}</p>
+          <ul>{p.bullets.map((x) => <li>{x}</li>)}</ul>
+        </article>
+      ))}
+    </section>
+
+    <section>
+      <h2>Certificates</h2>
+      <ul>
+        {profile.certificates.map((c) => (
+          <li>
+            {c.name}, {c.issuer} ({c.date}){c.link && <> · <a href={c.link}>credential</a></>}
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section>
+      <h2>Volunteering</h2>
+      {profile.org_experience.map((o) => (
+        <article>
+          <h3>{o.role}, {o.organization}</h3>
+          <p class="meta">{o.duration}</p>
+          <ul>{o.bullets.map((x) => <li>{x}</li>)}</ul>
+        </article>
+      ))}
+    </section>
+  </main>
+</Layout>
+
+<style is:global>
+  .cv { max-width: 46rem; margin: 0 auto; padding: 2rem 16px 4rem; font-family: var(--font-serif); line-height: 1.55; }
+  .cv h1, .cv h2, .cv h3 { font-family: var(--font-serif); margin: 0; }
+  .cv h2 { margin-top: 1.8rem; border-bottom: 1px solid var(--line); padding-bottom: .2rem; font-size: 1.2rem; }
+  .cv h3 { margin-top: 1rem; font-size: 1rem; }
+  .cv .headline { margin: .2rem 0; font-size: 1.1rem; }
+  .cv .meta { color: var(--muted); margin: .2rem 0; overflow-wrap: anywhere; }
+  .cv a { color: var(--accent); }
+  .cv ul { padding-left: 1.2rem; margin: .4rem 0; }
+  .cv .skills { columns: 2; }
+  .cv li { overflow-wrap: anywhere; }
+</style>
