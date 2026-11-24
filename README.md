@@ -20,4 +20,4 @@ After content changes, run `npm run build && npm run preview`, open `/cv`, print
 
 After changing the name, headline or scene art, run `npm run og` to regenerate the link-preview image `public/og.png` (1200x630). It builds the site with the `/og-card` route (normal builds drop that route), screenshots it with Playwright chromium, and fails if the card contains an email or phone number.
 
-At deploy time, set `site` in `astro.config.mjs` to the Vercel URL (or set the `SITE` env var). Without it, `og:image` and `og:url` are omitted, because crawlers need absolute URLs.
+The site URL is `https://agustaralfonso.vercel.app` (`site` in `astro.config.mjs`; override with the `SITE` env var). `og:image` and `og:url` use it, because crawlers need absolute URLs.

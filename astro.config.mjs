@@ -5,7 +5,7 @@ import react from '@astrojs/react';
 export default defineConfig({
   output: 'static',
   // Absolute URL for og:image/og:url. Set to the Vercel URL at deploy time (or via SITE); unset = tags omitted.
-  site: process.env.SITE || undefined,
+  site: process.env.SITE || 'https://agustaralfonso.vercel.app',
   integrations: [
     react(),
     {

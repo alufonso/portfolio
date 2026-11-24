@@ -11,10 +11,10 @@ test('public/og.png is a 1200x630 PNG', () => {
   expect([buf.readUInt32BE(16), buf.readUInt32BE(20)]).toEqual([1200, 630]);
 });
 
-test('no site: no relative og:image/og:url, og-card route not deployed', async ({ page, request }) => {
+test('default site: absolute og tags on the Vercel URL, og-card route not deployed', async ({ page, request }) => {
   await page.goto('/');
-  await expect(page.locator('meta[property="og:image"]')).toHaveCount(0);
-  await expect(page.locator('meta[property="og:url"]')).toHaveCount(0);
+  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', 'https://agustaralfonso.vercel.app/og.png');
+  await expect(page.locator('meta[property="og:url"]')).toHaveAttribute('content', 'https://agustaralfonso.vercel.app/');
   await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute('content', 'summary_large_image');
   expect((await request.get('/og-card')).status()).toBe(404);
 });
