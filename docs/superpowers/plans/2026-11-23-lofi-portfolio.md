@@ -6,13 +6,13 @@
 
 **Architecture:** Astro renders every page and all tab panels as static HTML. Two React islands sit on top: `Player` (tabs, item navigation, audio controls) and `PixelScene` (animated SVG). They share state only through the URL hash and toggle the static panels through data attributes on `#deck`. Content comes from `src/data/profile.json`, which a zod schema validates at build time.
 
-**Tech Stack:** Astro 6.4.x (static) with `@astrojs/react` 5.0.x, React 19, TypeScript, zod, Vitest, Playwright, `@axe-core/playwright`, and `@fontsource/*` packages (self-hosted OFL fonts).
+**Tech Stack:** Astro 7.4.x (static) with `@astrojs/react` 6.0.x, React 19, TypeScript, zod, Vitest, Playwright, `@axe-core/playwright`, and `@fontsource/*` packages (self-hosted OFL fonts).
 
 **Spec:** `docs/superpowers/specs/2026-11-23-lofi-portfolio-design.md` (read it alongside this plan).
 
 ## Global Constraints
 
-- Node on the dev machine is **22.20.0**. Pin `astro@~6.4.8` and `@astrojs/react@~5.0.7`; Astro 7 needs Node ≥ 22.23.4.
+- Node on the dev machine is **22.23.5** (`engines.node >=22.23.4`). Use `astro@^7.4.13` and `@astrojs/react@^6.0.6`; Astro 6.4.x has critical advisories fixed only in ≥ 7.3.8.
 - Output is **static** (`output: 'static'`). No server code and no Vercel adapter.
 - English only.
 - Palette tokens, exact values: paper `#f6f1e9`, ink `#2b2520`, accent `#b5532a`, night `#2a2238`, lamp `#f2b45c`, muted `#6b6058`, line `#e3d9cc`.
@@ -75,7 +75,7 @@ README.md                        # dev commands + release checklist
 - Produces: `Layout.astro` with props `{ title: string; description: string }` and a default slot. It imports the fonts and `tokens.css`. CSS custom properties: `--paper --ink --accent --night --lamp --muted --line --font-pixel --font-serif --font-sans`.
 - npm scripts: `dev`, `build`, `preview`, `test:unit` (`vitest run`), `test:e2e` (`playwright test`), `test` (both).
 
-- [ ] **Step 1:** Install deps: `npm i astro@~6.4.8 @astrojs/react@~5.0.7 react@^19 react-dom@^19 zod @fontsource/pixelify-sans @fontsource/lora @fontsource/inter` and `npm i -D typescript @types/react @types/react-dom vitest @playwright/test @axe-core/playwright`. Then `npx playwright install chromium`.
+- [ ] **Step 1:** Install deps: `npm i astro@^7.4.13 @astrojs/react@^6.0.6 react@^19 react-dom@^19 zod @fontsource/pixelify-sans @fontsource/lora @fontsource/inter` and `npm i -D typescript @types/react @types/react-dom vitest @playwright/test @axe-core/playwright`. Then `npx playwright install chromium`.
 - [ ] **Step 2:** Write `tests/e2e/smoke.spec.ts`: `test('home responds and has title')`. Assert that `page.goto('/')` returns 200, that `page.title()` contains `Agustar Alfonso`, and that **no request goes to a host other than the preview server** (collect `page.on('request')` URLs and expect all to start with the baseURL).
 - [ ] **Step 3:** Configure `playwright.config.ts`. Use `webServer: { command: 'npm run build && npm run preview -- --port 4321', url: 'http://localhost:4321' }` and two projects: `desktop` (1280×800) and `mobile` (`devices['Pixel 7']`).
 - [ ] **Step 4:** Run `npm run test:e2e`. Expected: FAIL (no page yet, or wrong title).

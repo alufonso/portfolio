@@ -1,7 +1,7 @@
 # Portfolio
 
 Static recruiter portfolio: Astro + React islands, lofi pixel-art music-player theme.
-Requires Node 22.20+ (Astro pinned to 6.4.x).
+Requires Node 22.23.4+ (Astro 7).
 
 ## Commands
 
