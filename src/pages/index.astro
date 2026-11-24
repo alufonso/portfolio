@@ -3,6 +3,7 @@ import { existsSync } from 'node:fs';
 import Layout from '../components/Layout.astro';
 import Deck from '../components/Deck.astro';
 import Player from '../components/islands/Player';
+import PixelScene from '../components/islands/PixelScene';
 import { profile } from '../data/profile';
 
 const b = profile.basic_info;
@@ -36,7 +37,7 @@ const linkedin = /^[a-z]+:\/\//i.test(b.linkedin) ? b.linkedin : `https://${b.li
   <main class="shell">
     <div class="left">
       <h1>{b.name}</h1>
-      <!-- Task 5 mounts Player here; Task 7 mounts PixelScene -->
+      <PixelScene client:load />
       <Player client:load tabs={[...tabs]} itemLabels={itemLabels} />
       <nav aria-label="Actions">
         <a href={cv}>⬇ CV</a>
