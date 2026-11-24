@@ -161,7 +161,7 @@ README.md                        # dev commands + release checklist
   - `playlist lists 5 jobs in order`: the first article contains "Global Collabo Tech", the last contains "Universitas Islam Negeri Sultan Syarif Kasim Riau".
   - `singles link to 5 case studies`: 5 `a[href^="/projects/"]`.
   - `action links work without JS`: `nav[aria-label="Actions"]` contains links to `/cv` and `mailto:`.
-  - `no phone number anywhere`: `page.content()` does not contain `PHONE_REDACTED`.
+  - `no phone number anywhere`: `page.content()` does not contain the owner's phone number.
 - [ ] **Step 2:** Run `npx playwright test tests/e2e/nojs.spec.ts`. Expected: FAIL.
 - [ ] **Step 3:** Build `Deck.astro`, the panels, and the static `<nav aria-label="Actions">` in `index.astro` (link rules in Task 5's "Not in the island" list). They use the warm editorial styles; cards get `border: 2px solid var(--ink); box-shadow: 3px 3px 0 var(--accent)`.
 - [ ] **Step 4:** Run it again. Expected: PASS.
@@ -307,7 +307,7 @@ README.md                        # dev commands + release checklist
 - `/cv` sections, in order: header (name, headline, location, email, LinkedIn, GitHub), Summary, Skills (**all** `skills[]`), Experience, Projects, Education, Publication, Certificates, Volunteering. No art and no islands.
 - Layout: two columns at ≥ 900px (scene + player at 42%). Below that, the scene sits in a top strip, tabs scroll horizontally (`overflow-x:auto`), and the action bar is `position: sticky; bottom: 0`.
 
-- [ ] **Step 1:** Write `tests/e2e/cv.spec.ts` with `javaScriptEnabled: false`: all 9 headings are present, the skills list has 32 items, and the page contains no `PHONE_REDACTED`. Then `page.emulateMedia({ media: 'print' })` and check that no element with `data-panel` or `svg[data-monitor]` exists.
+- [ ] **Step 1:** Write `tests/e2e/cv.spec.ts` with `javaScriptEnabled: false`: all 9 headings are present, the skills list has 32 items, and the page contains no the owner's phone number. Then `page.emulateMedia({ media: 'print' })` and check that no element with `data-panel` or `svg[data-monitor]` exists.
 - [ ] **Step 2:** Write `tests/e2e/quality.spec.ts`:
   - `axe has no serious violations` on `/`, `/cv`, and `/projects/cvsight` (`AxeBuilder`; filter `impact in ['serious','critical']` and expect `[]`).
   - Review Focus 2: `no horizontal scroll at 320px`. At viewport 320×640, `document.documentElement.scrollWidth <= 320` on `/` and `/cv`. The "⬇ CV" link is in the viewport.
