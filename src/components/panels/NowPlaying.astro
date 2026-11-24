@@ -1,0 +1,15 @@
+---
+import { profile } from '../../data/profile';
+const b = profile.basic_info;
+const url = (v: string) => (/^[a-z]+:\/\//i.test(v) ? v : `https://${v}`);
+---
+
+<section data-panel="now-playing" id="panel-now-playing" aria-labelledby="tab-now-playing">
+  <h2>Now Playing — About</h2>
+  <p><strong>{b.headline}</strong></p>
+  <p>{b.summary}</p>
+  <p class="meta">{b.location}</p>
+  <p><a href={url(b.linkedin)}>LinkedIn</a> · <a href={url(b.github)}>GitHub</a></p>
+  <h3>Top skills</h3>
+  <ul class="chips">{profile.skills.slice(0, 10).map((s) => <li>{s}</li>)}</ul>
+</section>

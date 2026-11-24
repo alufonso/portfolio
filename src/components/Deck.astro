@@ -1,0 +1,30 @@
+---
+import NowPlaying from './panels/NowPlaying.astro';
+import Playlist from './panels/Playlist.astro';
+import Singles from './panels/Singles.astro';
+import LinerNotes from './panels/LinerNotes.astro';
+import Stickers from './panels/Stickers.astro';
+---
+
+<div id="deck">
+  <NowPlaying /><Playlist /><Singles /><LinerNotes /><Stickers />
+</div>
+
+<style is:global>
+  #deck [data-panel] { margin: 0 0 2rem; }
+  #deck h2 { font-family: var(--font-pixel); font-size: 1.4rem; margin: 0 0 1rem; }
+  #deck h3 { font-family: var(--font-serif); font-size: 1.15rem; margin: 0 0 .25rem; }
+  #deck p, #deck li { font-family: var(--font-serif); line-height: 1.55; }
+  #deck article {
+    background: #fff9; border: 2px solid var(--ink); box-shadow: 3px 3px 0 var(--accent);
+    padding: .9rem 1rem; margin: 0 0 1rem;
+  }
+  #deck .meta { color: var(--muted); font-size: .85rem; margin: 0 0 .5rem; }
+  #deck .chips { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: .35rem; }
+  #deck .chips li { font: 600 .75rem var(--font-sans); border: 1px solid var(--line); padding: .1rem .45rem; }
+  #deck a { color: var(--accent); }
+  #deck .cover { width: 4rem; height: 4rem; border: 2px solid var(--ink); background: var(--night); float: right; margin-left: 1rem; }
+  /* JS mode only: Task 5 toggles .is-active / .is-open */
+  #deck[data-js] [data-panel]:not(.is-active) { display: none; }
+  #deck[data-js] article:not(.is-open) .detail { display: none; }
+</style>

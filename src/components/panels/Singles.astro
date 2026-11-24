@@ -1,0 +1,15 @@
+---
+import { profile } from '../../data/profile';
+---
+
+<section data-panel="singles" id="panel-singles" aria-labelledby="tab-singles">
+  <h2>Singles — Projects</h2>
+  {profile.projects.map((p, i) => (
+    <article data-item={i}>
+      <div class="cover" data-cover={p.cover} aria-hidden="true"></div>
+      <h3><a href={`/projects/${p.slug}`}>{p.name}</a></h3>
+      <p class="meta">{p.technologies.join(' · ')}</p>
+      <p class="detail">{p.case_study.summary}</p>
+    </article>
+  ))}
+</section>

@@ -1,0 +1,17 @@
+---
+import { profile } from '../../data/profile';
+---
+
+<section data-panel="playlist" id="panel-playlist" aria-labelledby="tab-playlist">
+  <h2>Playlist — Experience</h2>
+  {profile.work_experience.map((w, i) => (
+    <article data-item={i}>
+      <h3>{w.title} — {w.company}</h3>
+      <p class="meta">{w.duration} · {w.type}</p>
+      <div class="detail">
+        <ul>{w.bullets.map((x) => <li>{x}</li>)}</ul>
+        <ul class="chips">{w.tech.map((t) => <li>{t}</li>)}</ul>
+      </div>
+    </article>
+  ))}
+</section>

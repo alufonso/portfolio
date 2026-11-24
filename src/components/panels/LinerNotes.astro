@@ -1,0 +1,22 @@
+---
+import { profile } from '../../data/profile';
+const items = [
+  ...profile.education.map((e) => ({ h: e.degree, sub: e.institution, d: e.duration, bullets: e.bullets, link: undefined as string | undefined })),
+  ...profile.publications.map((p) => ({ h: p.title, sub: p.publisher, d: p.date, bullets: p.bullets, link: p.link })),
+  ...profile.org_experience.map((o) => ({ h: o.role, sub: o.organization, d: o.duration, bullets: o.bullets, link: undefined })),
+];
+---
+
+<section data-panel="liner-notes" id="panel-liner-notes" aria-labelledby="tab-liner-notes">
+  <h2>Liner Notes — Education & Publication</h2>
+  {items.map((x, i) => (
+    <article data-item={i}>
+      <h3>{x.h}</h3>
+      <p class="meta">{x.sub} · {x.d}</p>
+      <div class="detail">
+        <ul>{x.bullets.map((b) => <li>{b}</li>)}</ul>
+        {x.link && <p><a href={x.link}>Read the paper</a></p>}
+      </div>
+    </article>
+  ))}
+</section>
