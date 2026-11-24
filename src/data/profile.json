@@ -1,0 +1,413 @@
+{
+  "basic_info": {
+    "name": "Agustar Alfonso",
+    "email": "alfonsoagustar@gmail.com",
+    "location": "Kecamatan Cikarang Selatan, West Java, Indonesia",
+    "summary": "I'm a Full-Stack & AI Engineer at Global Collabo Tech (Minori Group), where I build AI-powered products end to end, from the AI and backend services to the web and mobile apps people use.\nI like owning a feature from start to finish: understanding the problem, writing the spec, building it across the stack, testing it and seeing it through to release. I care about products that work reliably for real users, not just in a demo.\nI graduated in Informatics Engineering from UIN Sultan Syarif Kasim Riau (GPA 3.76). For my thesis, I fine-tuned an IndoBERT model for emotion classification in Indonesian song lyrics, published in a SINTA 3 journal. I also guided students through practicums as a laboratory assistant.\nTools I work with most: Python, TypeScript, FastAPI, Next.js, React Native, Flutter, PostgreSQL, Docker and cloud platforms such as Google Cloud.",
+    "github": "github.com/alufonso",
+    "linkedin": "linkedin.com/in/agustaralfonso",
+    "headline": "Full-stack & AI Engineer",
+    "open_to": "Full-stack, AI and backend engineering roles"
+  },
+  "skills": [
+    "Python",
+    "TypeScript",
+    "JavaScript",
+    "FastAPI",
+    "Next.js",
+    "React",
+    "React Native",
+    "Flutter",
+    "PostgreSQL",
+    "MongoDB",
+    "Supabase",
+    "Docker",
+    "Google Cloud Platform (GCP)",
+    "Google Cloud Run",
+    "Cloudflare Workers",
+    "Amazon Web Services (AWS)",
+    "Cloud Computing",
+    "LiveKit",
+    "WebSocket",
+    "LangGraph",
+    "LangChain",
+    "LLM applications",
+    "Generative AI",
+    "Artificial Intelligence (AI)",
+    "Computer Vision",
+    "Machine Learning",
+    "Deep Learning",
+    "Prompt Engineering",
+    "PostHog",
+    "Spec-Driven Development",
+    "Laravel",
+    "HTML"
+  ],
+  "education": [
+    {
+      "institution": "Universitas Islam Negeri Sultan Syarif Kasim Riau",
+      "degree": "Bachelor of Engineering, Informatics Engineering",
+      "duration": "Aug 2022 - Sep 2026",
+      "bullets": [
+        "Graduated with GPA 3.76",
+        "Thesis: fine-tuned an IndoBERT model for emotion classification in Indonesian song lyrics, published in a SINTA 3 journal"
+      ]
+    }
+  ],
+  "work_experience": [
+    {
+      "title": "Artificial Intelligence Engineer",
+      "company": "Global Collabo Tech",
+      "duration": "Oct 2026 - Present",
+      "type": "Apprenticeship",
+      "bullets": [
+        "Built AI speech features: live transcription and translation, telling apart who is speaking when candidates share one microphone, and filtering out text the speech model invents from background noise.",
+        "Used an LLM to match speakers to names and correct misheard names in group interview transcripts, and to generate interview summaries.",
+        "Built benchmarks with real recordings to measure and improve speaker-identification accuracy.",
+        "Built group interviews end to end: multi-candidate sessions, reusable interview setups, screen sharing, session timers and server-side recording.",
+        "Built a live dashboard for interviewers showing candidate body-language metrics, plus post-interview body-language and conversation reports.",
+        "Shipped across the frontend (Next.js, React) and backend (Python, FastAPI, MongoDB), with real-time video over LiveKit and self-hosted AI models (Faster-Whisper, Qwen via vLLM)."
+      ],
+      "tech": [
+        "Next.js",
+        "React",
+        "Python",
+        "FastAPI",
+        "MongoDB",
+        "LiveKit",
+        "Faster-Whisper",
+        "Qwen",
+        "vLLM"
+      ]
+    },
+    {
+      "title": "Full-stack & AI Engineer",
+      "company": "Petak-app",
+      "duration": "Oct 2026 - Present",
+      "type": "Contract",
+      "bullets": [
+        "Built features end to end across the mobile app (React Native/Expo), website (Cloudflare Pages + Workers, D1), internal tools (Node.js on Google Cloud Run) and backend (TypeScript, Hono, PostgreSQL).",
+        "Shaped how the AI assistants behave in conversation, including personalisation and onboarding.",
+        "Built monitoring for AI cost, quality and usage, including cost checks against provider invoices.",
+        "Built secure phone-based sign-in with verification and cost controls.",
+        "Built analytics dashboards and internal admin tools for the team.",
+        "Wrote specs and shipped through code review and automated QA."
+      ],
+      "tech": [
+        "React Native",
+        "Expo",
+        "Cloudflare Pages",
+        "Cloudflare Workers",
+        "D1",
+        "Node.js",
+        "Google Cloud Run",
+        "TypeScript",
+        "Hono",
+        "PostgreSQL"
+      ]
+    },
+    {
+      "title": "Full-stack & AI Engineer",
+      "company": "Haloop.AI",
+      "duration": "Sep 2026 - Present",
+      "type": "Contract",
+      "bullets": [
+        "Built AI features on the assistant's LangGraph runtime, including turning imported WhatsApp chats into saved moments and reminders, with better accuracy, reliability and privacy.",
+        "Built features end to end across the mobile app (Flutter), website and admin dashboard (Next.js), and backend services (TypeScript on Google Cloud Run, Supabase/PostgreSQL).",
+        "Built subscriptions, in-app purchases, a shared credits system and configurable referral rewards.",
+        "Built campaign sign-up and attribution tracking that follows a user from the website to the mobile app.",
+        "Built analytics and user tracking with PostHog, plus relationship-graph and contact management features.",
+        "Wrote specs and QA plans, and shipped through code review and CI."
+      ],
+      "tech": [
+        "LangGraph",
+        "Flutter",
+        "Next.js",
+        "TypeScript",
+        "Google Cloud Run",
+        "Supabase",
+        "PostgreSQL",
+        "PostHog"
+      ]
+    },
+    {
+      "title": "Student Intern",
+      "company": "PT. Bank Riau Kepri Syariah (Perseroda)",
+      "duration": "Feb 2025 - Apr 2025",
+      "type": "Internship",
+      "bullets": [
+        "Developed a web-based CSR (Corporate Social Responsibility) fund recording application using Laravel.",
+        "Helped the company track and monitor CSR fund realization monthly and annually, making reporting more organized and easier to manage."
+      ],
+      "tech": [
+        "Laravel"
+      ]
+    },
+    {
+      "title": "Laboratory Assistant",
+      "company": "Universitas Islam Negeri Sultan Syarif Kasim Riau",
+      "duration": "Aug 2024 - Jul 2025",
+      "type": "Part-time",
+      "bullets": [
+        "Guided students through laboratory practicums, helping them understand and apply course materials in a hands-on setting.",
+        "Assisted lecturers in planning and managing laboratory-based academic activities to ensure smooth and effective sessions.",
+        "Maintained laboratory software and hardware, ensuring systems remained functional and ready for use in practicum sessions."
+      ],
+      "tech": []
+    }
+  ],
+  "org_experience": [
+    {
+      "role": "Person in Charge (PIC) - Publication, Documentation & Decoration (PDD)",
+      "organization": "UIN Sultan Syarif Kasim Riau (KKN - Kuliah Kerja Nyata)",
+      "duration": "Jul 2025 - Sep 2025",
+      "bullets": [
+        "Served as PIC for Publication, Documentation & Decoration during KKN (Community Service Program) in Pakning Asal Village, Bukit Batu District, Bengkalis Regency, Riau.",
+        "Managed the official Instagram account of the KKN group (@kkn_usr.desapakningasal.2025), consistently producing activity documentation content.",
+        "Produced and published 144 pieces of content (photos and videos) documenting the entire community work program.",
+        "Coordinated with group members on content planning and decoration for each village activity."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "slug": "haloop-ai",
+      "name": "Haloop.AI",
+      "featured": true,
+      "cover": "cover-haloop-ai",
+      "technologies": [
+        "LangGraph",
+        "Flutter",
+        "Next.js",
+        "TypeScript",
+        "Google Cloud Run",
+        "Supabase",
+        "PostgreSQL",
+        "PostHog"
+      ],
+      "case_study": {
+        "summary": "AI assistant app where I built features across the mobile app, web and backend.",
+        "role": "Full-stack & AI Engineer (Contract)",
+        "problem": "The assistant needed to turn imported WhatsApp chats into saved moments and reminders, and the product needed monetisation, growth tracking and analytics around it.",
+        "built": [
+          "Built AI features on the assistant's LangGraph runtime, including turning imported WhatsApp chats into saved moments and reminders, with better accuracy, reliability and privacy.",
+          "Built features end to end across the mobile app (Flutter), website and admin dashboard (Next.js), and backend services (TypeScript on Google Cloud Run, Supabase/PostgreSQL).",
+          "Built subscriptions, in-app purchases, a shared credits system and configurable referral rewards.",
+          "Built campaign sign-up and attribution tracking that follows a user from the website to the mobile app.",
+          "Built analytics and user tracking with PostHog, plus relationship-graph and contact management features."
+        ],
+        "links": []
+      }
+    },
+    {
+      "slug": "petak-app",
+      "name": "Petak-app",
+      "featured": true,
+      "cover": "cover-petak-app",
+      "technologies": [
+        "React Native",
+        "Expo",
+        "Cloudflare Workers",
+        "Node.js",
+        "Google Cloud Run",
+        "TypeScript",
+        "Hono",
+        "PostgreSQL"
+      ],
+      "case_study": {
+        "summary": "Product with AI assistants, built end to end across mobile, web, internal tools and backend.",
+        "role": "Full-stack & AI Engineer (Contract)",
+        "problem": "The AI assistants needed to behave well in conversation, and the team needed visibility into AI cost, quality and usage plus secure sign-in.",
+        "built": [
+          "Built features end to end across the mobile app (React Native/Expo), website (Cloudflare Pages + Workers, D1), internal tools (Node.js on Google Cloud Run) and backend (TypeScript, Hono, PostgreSQL).",
+          "Shaped how the AI assistants behave in conversation, including personalisation and onboarding.",
+          "Built monitoring for AI cost, quality and usage, including cost checks against provider invoices.",
+          "Built secure phone-based sign-in with verification and cost controls.",
+          "Built analytics dashboards and internal admin tools for the team."
+        ],
+        "links": []
+      }
+    },
+    {
+      "slug": "cvsight",
+      "name": "CVSight",
+      "featured": true,
+      "cover": "cover-cvsight",
+      "repo": "https://github.com/alufonso/cv-reviewer-agent",
+      "technologies": [
+        "Python",
+        "FastAPI",
+        "React",
+        "Vite",
+        "Tailwind CSS",
+        "Docker",
+        "Google Gemini"
+      ],
+      "case_study": {
+        "summary": "AI tool that analyses a CV against a job description and generates a tailored, ATS-friendly CV.",
+        "role": "Solo developer",
+        "problem": "Tailoring a CV to every job posting by hand is slow, and relevant past experience is easy to overlook.",
+        "built": [
+          "Master Profile extraction: upload a CV (PDF/DOCX) and save a structured profile locally.",
+          "CV analysis against a job description, with a fit analysis and actionable suggestions.",
+          "Tailored CV generation in PDF or DOCX, selected from the whole Master Profile.",
+          "Interactive suggestions that preview fixes without changing the base Master Profile."
+        ],
+        "links": [
+          {
+            "label": "Repository",
+            "url": "https://github.com/alufonso/cv-reviewer-agent"
+          }
+        ]
+      }
+    },
+    {
+      "slug": "indobert-lyrics",
+      "name": "IndoBERT Lyric-Emotion Research",
+      "featured": true,
+      "cover": "cover-indobert-lyrics",
+      "technologies": [
+        "Python",
+        "IndoBERT",
+        "Machine Learning",
+        "Deep Learning"
+      ],
+      "case_study": {
+        "summary": "Undergraduate thesis: emotion classification of Indonesian song lyrics with a fine-tuned IndoBERT.",
+        "role": "Researcher and author",
+        "problem": "Classifying emotion in Indonesian song lyrics, a low-resource setting for NLP.",
+        "built": [
+          "Compiled a dataset of 1,025 labeled lyric entries covering four emotions: joy, sadness, fear and anger.",
+          "Fine-tuned and evaluated IndoBERT-base-p2 for emotion classification."
+        ],
+        "result": "Best configuration reached 75.73% accuracy and 75.85% macro-averaged F1-score; published in the SINTECHCOM journal (SINTA 3).",
+        "links": []
+      }
+    },
+    {
+      "slug": "jankenpovision",
+      "name": "JankenpoVision",
+      "featured": true,
+      "cover": "cover-jankenpovision",
+      "link": "https://jankenpo.vercel.app/",
+      "technologies": [
+        "JavaScript",
+        "Computer Vision",
+        "MediaPipe Hands",
+        "Firebase"
+      ],
+      "case_study": {
+        "summary": "Real-time hand-gesture rock-paper-scissors game in the browser.",
+        "role": "Solo developer",
+        "problem": "Make a classic game playable with just a webcam, alone or against a friend.",
+        "built": [
+          "Built a web-based rock-paper-scissors game with real-time hand gesture recognition using computer vision (MediaPipe Hands), supporting both live webcam input and image upload.",
+          "Implemented a real-time multiplayer mode powered by Firebase (room codes, shareable links, live dual gesture detection) alongside a single-player mode against AI.",
+          "Applied a modular architecture (game logic, multiplayer, navigation, gesture detection) to keep the codebase maintainable and scalable."
+        ],
+        "links": [
+          {
+            "label": "Live demo",
+            "url": "https://jankenpo.vercel.app/"
+          }
+        ]
+      }
+    }
+  ],
+  "publications": [
+    {
+      "title": "An IndoBERT-based Framework for Emotion Classification in Indonesian Song Lyrics",
+      "publisher": "SINTECHCOM: Science, Technology and Communication Journal",
+      "date": "Jun 8, 2026",
+      "bullets": [
+        "Developed and evaluated an emotion classification model for Indonesian song lyrics using fine-tuned IndoBERT-base-p2.",
+        "Compiled a dataset of 1,025 labeled lyric entries covering four emotion categories: joy, sadness, fear, and anger.",
+        "Best model configuration achieved 75.73% accuracy and 75.85% macro-averaged F1-score."
+      ]
+    }
+  ],
+  "certificates": [
+    {
+      "name": "Belajar Dasar Cloud dan Gen AI di AWS",
+      "issuer": "Dicoding Indonesia",
+      "date": "Aug 2026",
+      "skills": [
+        "Cloud Computing",
+        "Amazon Web Services (AWS)",
+        "Generative AI"
+      ],
+      "badge": "badge-cloud"
+    },
+    {
+      "name": "Spec-Driven Development dengan Kiro",
+      "issuer": "Dicoding Indonesia",
+      "date": "Aug 2026",
+      "skills": [
+        "Spec-Driven Development"
+      ],
+      "badge": "badge-spec"
+    },
+    {
+      "name": "Belajar Strategi Pengembangan Diri",
+      "issuer": "Dicoding Indonesia",
+      "date": "Jul 2026",
+      "skills": [],
+      "badge": "badge-growth"
+    },
+    {
+      "name": "Belajar Machine Learning untuk Pemula",
+      "issuer": "Dicoding Indonesia",
+      "date": "Jul 2026",
+      "skills": [
+        "Machine Learning",
+        "Python"
+      ],
+      "badge": "badge-ml"
+    },
+    {
+      "name": "Memulai Pemrograman dengan Python",
+      "issuer": "Dicoding Indonesia",
+      "date": "Jul 2026",
+      "skills": [
+        "Python"
+      ],
+      "badge": "badge-python"
+    },
+    {
+      "name": "Prompt Engineering untuk Software Developer",
+      "issuer": "Dicoding Indonesia",
+      "date": "Jul 2026",
+      "skills": [
+        "Prompt Engineering"
+      ],
+      "badge": "badge-prompt"
+    },
+    {
+      "name": "Introduction to Financial Literacy",
+      "issuer": "Dicoding Indonesia",
+      "date": "Jul 2026",
+      "skills": [],
+      "badge": "badge-finance"
+    },
+    {
+      "name": "Belajar Dasar AI",
+      "issuer": "Dicoding Indonesia",
+      "date": "Jul 2026",
+      "skills": [
+        "Machine Learning",
+        "Deep Learning"
+      ],
+      "badge": "badge-ai"
+    },
+    {
+      "name": "Legacy Responsive Web Design V8",
+      "issuer": "freeCodeCamp",
+      "date": "Oct 2025",
+      "skills": [
+        "JavaScript",
+        "HTML"
+      ],
+      "badge": "badge-web"
+    }
+  ]
+}
