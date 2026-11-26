@@ -291,7 +291,12 @@
           "Fine-tuned and evaluated IndoBERT-base-p2 for emotion classification."
         ],
         "result": "Best configuration reached 75.73% accuracy and 75.85% macro-averaged F1-score; published in the SINTECHCOM journal (SINTA 3).",
-        "links": []
+        "links": [
+          {
+            "label": "Paper (DOI)",
+            "url": "https://doi.org/10.59190/stc.v6i3.372"
+          }
+        ]
       }
     },
     {
