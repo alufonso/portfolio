@@ -22,7 +22,7 @@ test('CRT toggle flips, shows overlay and persists', async ({ page }) => {
   await expect(crt(page)).toHaveAttribute('aria-pressed', 'true');
   await expect(page.locator('.crt')).toBeVisible();
   await page.reload();
-  await expect(page.locator('#deck[data-js]')).toBeAttached();
+  await expect(page.locator('astro-island[ssr]')).toHaveCount(0);
   await expect(crt(page)).toHaveAttribute('aria-pressed', 'true');
   await expect(page.locator('.crt')).toBeVisible();
 });
